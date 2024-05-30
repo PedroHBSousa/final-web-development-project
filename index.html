@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Final Project</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/modal.css">
+    <link rel="stylesheet" href="../css/card.css">
+</head>
+<body onload="loadCards()">
+    <header>
+        <Nav>
+            <ul>
+                <li><button onClick="openModal('add-form-modal')">Add Address</button></li>
+            </ul>
+        </Nav>
+    </header>
+    <main>
+	</main>
+	<div id="add-form-modal" class="modal" >
+		<main>
+			<h2>Enter Address</h2>
+			<form onsubmit="createCard(event)">
+				<label for="cep">CEP</label>
+				<input type="text" name="cep" id="cep">
+                <label for="uf">State</label>
+				<input type="text" name="uf" id="uf">
+                <label for="cidade">City</label>
+				<input type="text" name="cidade" id="cidade">
+				<label for="address">Street</label>
+				<input type="text" name="rua" id="rua">
+				<label for="bairro">Neighborhood</label>
+				<input type="text" name="bairro" id="bairro">
+				<label for="number">Number</label>
+				<input type="text" name="number" id="number">
+				<button>Add Address</button>
+			</form>
+		</main>
+	</div>
+    <script src="./js/main.js"></script>
+</body>
+</html>

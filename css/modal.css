@@ -1,0 +1,40 @@
+.modal {
+  position: absolute;
+  background: #000000e1;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+.modal main h2 {
+  margin: 0;
+}
+
+.modal main form {
+  margin: 20px 0 0 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal main form button {
+  margin: 20px 0 0 0;
+}
+
+input[type="text"] {
+  padding: 5px 10px;
+  border-radius: 10px;
+  font-size: 18px;
+  margin: 3px 0 16px 0;
+  border: none;
+  background: #333333;
+  color: #fff;
+}
+.modal main h2 {
+  margin: 0;
+}
+label {
+  padding: 5px;
+}

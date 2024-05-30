@@ -1,38 +1,54 @@
-html, body{
-    margin: 0;
-	padding: 0;
-	background: #242424;
-	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-	color: #FFF;
-	font-size: 1.1rem;
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: #242424;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  color: #fff;
+  font-size: 1.1rem;
 }
 body > header {
-    height: 70px;
-	background: #1d1d1d;
-	padding: 0 16px;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
+  height: 70px;
+  background: #1d1d1d;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
-nav ul{
-	display: flex;
-	list-style-type: none;
-	gap: 16px;
-	margin: 0;
-	padding: 0;
-	align-items: center;
+nav ul {
+  display: flex;
+  list-style-type: none;
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  align-items: center;
 }
-body > header nav a{
-	color: #FFF;
-	text-decoration: none;
-	padding: 0 0 21px 0;
+body > header nav a {
+  color: #fff;
+  text-decoration: none;
+  padding: 0 0 21px 0;
 }
 button {
-	background: #253629;
-	color: #ffffff;
-	padding: 10px 20px;
-	border: none;
-	border-radius: 20px;
-	cursor: pointer;
-    font-size: 1.1rem;
+  background: #253629;
+  color: #ffffff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 1.1rem;
+}
+body > footer {
+  background: #000;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+body > main {
+  min-height: calc(100vh - 302px);
+  padding: 16px;
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
 }
