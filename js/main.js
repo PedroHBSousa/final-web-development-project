@@ -30,6 +30,7 @@ const rua = document.getElementById("rua");
 const bairro = document.getElementById("bairro");
 const cidade = document.getElementById("cidade");
 const uf = document.getElementById("uf");
+const number = document.getElementById("number");
 
 const openModal = (idModal) => {
   const modal = document.getElementById(idModal);
@@ -58,8 +59,59 @@ cep.addEventListener("focusout", async () => {
   } catch (error) {
     console.log(error);
   }
+
+  const token = "bc77195853ce76f260a5420c48bad133";
+
+  try {
+    const response = await fetch(
+      `http://apiadvisor.climatempo.com.br/api/v1/locale/city?name=${cidade.value}&state=${uf.value}&country=BR&token=${token}`
+    );
+    const data = await response.json();
+
+    console.log(data);
+    console.log(data[0].id);
+  } catch (error) {
+    console.error(error);
+  }
   // let search = cep.value.replace("-", "");
 });
+
+// number.addEventListener("focusout", async () => {
+//   const teste = {
+//     CityName: "São Sebastião",
+//     state: "SP",
+//   };
+//   const token = "bc77195853ce76f260a5420c48bad133";
+
+//   try {
+//     const response = await fetch(
+//       `http://apiadvisor.climatempo.com.br/api/v1/locale/city?name=${teste.CityName}&state=${teste.state}&country=BR&token=${token}`
+//     );
+//     const data = await response.json();
+//     console.log(data);
+//   } catch (error) {
+//     console.error(error);
+//   }
+// });
+
+async function apenasUmTeste() {
+  const teste = {
+    CityName: "São Sebastião",
+    state: "SP",
+  };
+  const token = "bc77195853ce76f260a5420c48bad133";
+
+  try {
+    const response = await fetch(
+      `http://apiadvisor.climatempo.com.br/api/v1/locale/city?name=${teste.CityName}&state=${teste.state}&country=BR&token=${token}`
+    );
+    const data = await response.json();
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 function addCard({ cep, uf, cidade, bairro, rua, number }) {
   const main = document.querySelector("body > main");
 
@@ -104,3 +156,4 @@ const closeModal = (event, id) => {
     return;
   }
 };
+apenasUmTeste();
