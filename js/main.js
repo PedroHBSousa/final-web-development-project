@@ -1,116 +1,48 @@
-const allAddresses = [
-  {
-    cep: "11601033",
-    uf: "SP",
-    cidade: "São Sebastião",
-    bairro: "Canto Do Mar",
-    rua: "Rua Antonio Inacio da Costa",
-    number: 199,
-  },
-  {
-    cep: "11601033",
-    uf: "SP",
-    cidade: "São Sebastião",
-    bairro: "Canto Do Mar",
-    rua: "Rua Antonio Inacio da Costa",
-    number: 199,
-  },
-  {
-    cep: "11601033",
-    uf: "SP",
-    cidade: "São Sebastião",
-    bairro: "Canto Do Mar",
-    rua: "Rua Antonio Inacio da Costa",
-    number: 199,
-  },
-];
 
-const cep = document.getElementById("cep");
-const rua = document.getElementById("rua");
-const bairro = document.getElementById("bairro");
+const nameMovie = document.getElementById("nameMovie");
+const genre = document.getElementById("genre");
+const releaseDate = document.getElementById("date");
 const cidade = document.getElementById("cidade");
 const uf = document.getElementById("uf");
 const number = document.getElementById("number");
+
+function convertToBrazilianDate(date) {
+  const [year, month, day] = date.split("-");
+  return `${day}/${month}/${year}`;
+}
+
 
 const openModal = (idModal) => {
   const modal = document.getElementById(idModal);
   modal.style.display = "flex";
 };
-
 // ------------------- API VIACEP -------------------
-cep.addEventListener("focusout", async () => {
-  try {
-    const onlyNumbers = /^[0-9]+$/;
-    const cepValid = /^[0-9]{8}$/;
-
-    if (!onlyNumbers.test(cep.value) || !cepValid.test(cep.value)) {
-      throw { cep_error: "CEP invalid" };
+nameMovie.addEventListener("focusout", async () => {
+try {
+  const options = {
+    method: 'GET',
+    headers: {
+      accept: 'application/json',
+      Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5ZmM3ZWNiMGYzOWZhMDc3Y2E1YWIzZjNhZTU2NmFjMCIsInN1YiI6IjY2NWZhZmIxMzU1MjFlZjc4MmI0YTI2OCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.v68XA_FTrnGRuhqWgdaqieJgz8wI8WqywfEauczlFIs'
     }
-    const response = await fetch(`https://viacep.com.br/ws/${cep.value}/json/`);
+  };
+  
+  const responseID = await fetch(`https://api.themoviedb.org/3/search/movie?query=${nameMovie.value}&include_adult=false`, options);
+  const data = await responseID.json();
 
-    if (!response.ok) {
-      throw { cep_error: "CEP not found" };
-    }
-    const responseCep = await response.json();
-    rua.value = responseCep.logradouro;
-    bairro.value = responseCep.bairro;
-    cidade.value = responseCep.localidade;
-    uf.value = responseCep.uf;
-  } catch (error) {
-    console.log(error);
-  }
+  const responseDetails= await fetch(`https://api.themoviedb.org/3/movie/${data.results[0].id}?language=en-US'`, options);
+  const detailsMovie = await responseDetails.json();
 
-  const token = "bc77195853ce76f260a5420c48bad133";
+  genre.value = detailsMovie.genres[1].name;
+  releaseDate.value = convertToBrazilianDate(detailsMovie.release_date);
 
-  try {
-    const response = await fetch(
-      `http://apiadvisor.climatempo.com.br/api/v1/locale/city?name=${cidade.value}&state=${uf.value}&country=BR&token=${token}`
-    );
-    const data = await response.json();
+console.log(detailsMovie);
 
-    console.log(data);
-    console.log(data[0].id);
-  } catch (error) {
-    console.error(error);
-  }
-  // let search = cep.value.replace("-", "");
+} catch (error) {
+  console.log(error)
+}
 });
 
-// number.addEventListener("focusout", async () => {
-//   const teste = {
-//     CityName: "São Sebastião",
-//     state: "SP",
-//   };
-//   const token = "bc77195853ce76f260a5420c48bad133";
-
-//   try {
-//     const response = await fetch(
-//       `http://apiadvisor.climatempo.com.br/api/v1/locale/city?name=${teste.CityName}&state=${teste.state}&country=BR&token=${token}`
-//     );
-//     const data = await response.json();
-//     console.log(data);
-//   } catch (error) {
-//     console.error(error);
-//   }
-// });
-
-async function apenasUmTeste() {
-  const teste = {
-    CityName: "São Sebastião",
-    state: "SP",
-  };
-  const token = "bc77195853ce76f260a5420c48bad133";
-
-  try {
-    const response = await fetch(
-      `http://apiadvisor.climatempo.com.br/api/v1/locale/city?name=${teste.CityName}&state=${teste.state}&country=BR&token=${token}`
-    );
-    const data = await response.json();
-    console.log(data);
-  } catch (error) {
-    console.error(error);
-  }
-}
 
 function addCard({ cep, uf, cidade, bairro, rua, number }) {
   const main = document.querySelector("body > main");
@@ -156,4 +88,4 @@ const closeModal = (event, id) => {
     return;
   }
 };
-apenasUmTeste();
+

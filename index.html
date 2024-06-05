@@ -12,7 +12,7 @@
     <header>
         <Nav>
             <ul>
-                <li><button onClick="openModal('add-form-modal')">Add Address</button></li>
+                <li><button onClick="openModal('add-form-modal')">Add Movie</button></li>
             </ul>
         </Nav>
     </header>
@@ -20,21 +20,21 @@
 	</main>
 	<div id="add-form-modal" class="modal" >
 		<main>
-			<h2>Enter Address</h2>
+			<h2>Just enter the name of the movie</h2>
 			<form onsubmit="createCard(event)">
-				<label for="cep">CEP</label>
-				<input type="text" name="cep" id="cep">
-                <label for="uf">State</label>
-				<input type="text" name="uf" id="uf">
-                <label for="cidade">City</label>
-				<input type="text" name="cidade" id="cidade">
+				<label for="nameMovie">Name</label>
+				<input type="text" name="nameMovie" id="nameMovie">
+                <label for="genre">Genre</label>
+				<input type="text" name="genre" id="genre">
+                <label for="cidade">Release Date</label>
+				<input type="text" name="date" id="date">
 				<label for="address">Street</label>
 				<input type="text" name="rua" id="rua">
 				<label for="bairro">Neighborhood</label>
 				<input type="text" name="bairro" id="bairro">
 				<label for="number">Number</label>
 				<input type="text" name="number" id="number">
-				<button>Add Address</button>
+				<button>Insert Movie</button>
 			</form>
 		</main>
 	</div>
