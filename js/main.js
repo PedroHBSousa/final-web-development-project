@@ -1,10 +1,11 @@
 
-const nameMovie = document.getElementById("nameMovie");
+const search = document.getElementById("search-movie");
+const title = document.getElementById("title");
 const genre = document.getElementById("genre");
 const releaseDate = document.getElementById("date");
-const cidade = document.getElementById("cidade");
-const uf = document.getElementById("uf");
-const number = document.getElementById("number");
+const description = document.getElementById("description");
+const poster = document.getElementById("poster-preview");
+
 
 function convertToBrazilianDate(date) {
   const [year, month, day] = date.split("-");
@@ -15,32 +16,41 @@ function convertToBrazilianDate(date) {
 const openModal = (idModal) => {
   const modal = document.getElementById(idModal);
   modal.style.display = "flex";
+
+
 };
 // ------------------- API VIACEP -------------------
-nameMovie.addEventListener("focusout", async () => {
-try {
-  const options = {
-    method: 'GET',
-    headers: {
-      accept: 'application/json',
-      Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5ZmM3ZWNiMGYzOWZhMDc3Y2E1YWIzZjNhZTU2NmFjMCIsInN1YiI6IjY2NWZhZmIxMzU1MjFlZjc4MmI0YTI2OCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.v68XA_FTrnGRuhqWgdaqieJgz8wI8WqywfEauczlFIs'
+search.addEventListener("keydown", async (event) => {
+  if(event.key === "Enter") {
+    try {
+      const options = {
+        method: 'GET',
+        headers: {
+          accept: 'application/json',
+          Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5ZmM3ZWNiMGYzOWZhMDc3Y2E1YWIzZjNhZTU2NmFjMCIsInN1YiI6IjY2NWZhZmIxMzU1MjFlZjc4MmI0YTI2OCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.v68XA_FTrnGRuhqWgdaqieJgz8wI8WqywfEauczlFIs'
+        }
+      };
+      
+      const responseID = await fetch(`https://api.themoviedb.org/3/search/movie?query=${search.value}&include_adult=false`, options);
+      const data = await responseID.json();
+    
+      const responseDetails= await fetch(`https://api.themoviedb.org/3/movie/${data.results[0].id}?language=en-US'`, options);
+      const detailsMovie = await responseDetails.json();
+    
+      title.value = detailsMovie.title;
+      genre.value = detailsMovie.genres[0].name;
+      releaseDate.value = convertToBrazilianDate(detailsMovie.release_date);
+      description.value = detailsMovie.overview;
+      poster.style.backgroundImage = `url(https://image.tmdb.org/t/p/original${detailsMovie.poster_path})`;
+      // poster.src = "https://image.tmdb.org/t/p/original" + detailsMovie.poster_path;
+    
+    console.log(detailsMovie);
+    
+    } catch (error) {
+      console.log(error)
     }
-  };
-  
-  const responseID = await fetch(`https://api.themoviedb.org/3/search/movie?query=${nameMovie.value}&include_adult=false`, options);
-  const data = await responseID.json();
+  }
 
-  const responseDetails= await fetch(`https://api.themoviedb.org/3/movie/${data.results[0].id}?language=en-US'`, options);
-  const detailsMovie = await responseDetails.json();
-
-  genre.value = detailsMovie.genres[1].name;
-  releaseDate.value = convertToBrazilianDate(detailsMovie.release_date);
-
-console.log(detailsMovie);
-
-} catch (error) {
-  console.log(error)
-}
 });
 
 

@@ -18,25 +18,24 @@
     </header>
     <main>
 	</main>
-	<div id="add-form-modal" class="modal" >
-		<main>
-			<h2>Just enter the name of the movie</h2>
-			<form onsubmit="createCard(event)">
-				<label for="nameMovie">Name</label>
-				<input type="text" name="nameMovie" id="nameMovie">
-                <label for="genre">Genre</label>
-				<input type="text" name="genre" id="genre">
-                <label for="cidade">Release Date</label>
-				<input type="text" name="date" id="date">
-				<label for="address">Street</label>
-				<input type="text" name="rua" id="rua">
-				<label for="bairro">Neighborhood</label>
-				<input type="text" name="bairro" id="bairro">
-				<label for="number">Number</label>
-				<input type="text" name="number" id="number">
-				<button>Insert Movie</button>
-			</form>
-		</main>
+	<div id="add-form-modal" class="modal" />
+		<input type="text" id="search-movie" placeholder="Search for a movie">
+			<main>
+				<div id="poster-preview" class="poster-preview-loading">
+				</div>
+				<form onsubmit="createCard(event)">
+						<label for="title">Title</label>
+						<input type="text" name="title" id="title">
+						<label for="genre">Genre</label>
+						<input type="text" name="genre" id="genre">
+						<label for="date">Release Date</label>
+						<input type="text" name="date" id="date">
+						<label for="description">Description</label>
+						<input type="text" name="description" id="description">
+						<button>Insert Movie</button>
+				</form>
+			</main>
+		
 	</div>
     <script src="./js/main.js"></script>
 </body>

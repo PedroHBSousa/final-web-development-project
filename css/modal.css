@@ -8,6 +8,15 @@
   display: none;
   justify-content: center;
   align-items: center;
+
+  flex-direction: column;
+  
+}
+.modal main {
+  max-width: 600px;
+  display:flex;
+  justify-content: space-between;
+
 }
 .modal main h2 {
   margin: 0;
@@ -37,4 +46,26 @@ input[type="text"] {
 }
 label {
   padding: 5px;
+}
+
+.poster-preview-loading{
+  width: 300px;  
+  height: 450px; 
+  color: #aa1818;
+  font-size: 16px;
+  border: 1px solid #ccc; /* Opcional: borda para melhor visualização */
+  background-size: cover; /* Faz com que a imagem cubra todo o fundo da div */
+  background-position: center; /* Centraliza a imagem no fundo da div */
+ 
+
+}
+#search-movie {
+  width: 50%;
+  padding: 5px 10px;
+  border-radius: 10px;
+  font-size: 18px;
+  margin: 3px 0 16px 0;
+  border: none;
+  background: #333333;
+  color: #fff;
 }
