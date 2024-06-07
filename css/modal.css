@@ -10,13 +10,14 @@
   align-items: center;
 
   flex-direction: column;
-  
 }
-.modal main {
+#main-content {
   max-width: 600px;
-  display:flex;
+  display: flex;
   justify-content: space-between;
-
+}
+#main-content.hidden {
+  display: none;
 }
 .modal main h2 {
   margin: 0;
@@ -48,19 +49,19 @@ label {
   padding: 5px;
 }
 
-.poster-preview-loading{
-  width: 300px;  
-  height: 450px; 
+.poster-preview-loading {
+  width: 300px;
+  height: 450px;
   color: #aa1818;
   font-size: 16px;
-  border: 1px solid #ccc; /* Opcional: borda para melhor visualização */
   background-size: cover; /* Faz com que a imagem cubra todo o fundo da div */
   background-position: center; /* Centraliza a imagem no fundo da div */
- 
-
+  background-color: #1b1b1b;
+  margin-right: 50px;
+  border-radius: 15px;
 }
 #search-movie {
-  width: 50%;
+  width: 570px;
   padding: 5px 10px;
   border-radius: 10px;
   font-size: 18px;
@@ -68,4 +69,34 @@ label {
   border: none;
   background: #333333;
   color: #fff;
+  margin-bottom: 25px;
+}
+.loader {
+  display: none;
+  border: 16px solid #f3f3f3;
+  border-top: 16px solid #31632f;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 2s linear infinite;
+  margin-top: 100px;
+  margin-bottom: 50px;
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.loader.active {
+  display: block;
+}
+.hidden {
+  display: none;
+}
+#return-button {
+  margin-top: 25px;
+  width: 590px;
 }

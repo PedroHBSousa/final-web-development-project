@@ -19,8 +19,8 @@
     <main>
 	</main>
 	<div id="add-form-modal" class="modal" />
-		<input type="text" id="search-movie" placeholder="Search for a movie">
-			<main>
+		<input type="text" id="search-movie" placeholder="Press enter to search for the movie">
+			<main id="main-content">
 				<div id="poster-preview" class="poster-preview-loading">
 				</div>
 				<form onsubmit="createCard(event)">
@@ -35,7 +35,9 @@
 						<button>Insert Movie</button>
 				</form>
 			</main>
-		
+			<div class="loader"></div>
+			<button id="return-button">Return</button>
+
 	</div>
     <script src="./js/main.js"></script>
 </body>
