@@ -3,9 +3,15 @@ const title = document.getElementById("title");
 const genre = document.getElementById("genre");
 const releaseDate = document.getElementById("date");
 const description = document.getElementById("description");
-const poster = document.getElementById("poster-preview");
+const poster = document.querySelector(".poster-preview");
 const main = document.querySelector("#main-content");
 const loader = document.querySelector(".loader");
+const addressImage = document.getElementById("addressImage");
+const idMovie = document.getElementById("idMovie");
+
+// const backgroundImage = document.getElementById("backgroundimage");
+// let addressImage = "";
+
 
 function convertToBrazilianDate(date) {
   const [year, month, day] = date.split("-");
@@ -43,12 +49,18 @@ search.addEventListener("keydown", async (event) => {
       );
       const detailsMovie = await responseDetails.json();
 
+
       title.value = detailsMovie.title;
       genre.value = detailsMovie.genres[0].name;
+      idMovie.value = detailsMovie.id;
       releaseDate.value = convertToBrazilianDate(detailsMovie.release_date);
       description.value = detailsMovie.overview;
       poster.style.backgroundImage = `url(https://image.tmdb.org/t/p/original${detailsMovie.poster_path})`;
-    } catch (error) {
+
+      addressImage.value = "https://image.tmdb.org/t/p/original"+detailsMovie.poster_path;
+      console.log(addressImage.value);
+
+    } catch (error) { 
       console.log(error);
       if (
         error instanceof TypeError &&
@@ -67,20 +79,25 @@ search.addEventListener("keydown", async (event) => {
   }
 });
 
-function addCard({ cep, uf, cidade, bairro, rua, number }) {
+function addCard({ title, genre, date, description, idMovie, addressImage }) {
+
   const main = document.querySelector("body > main");
 
   main.innerHTML += `
   <div class="card-ticker" >
-   <header>${cep}</header>
-    <p>${uf}</p>
-    <p>${cidade}</p> 
-    <p>${bairro}</p>
-    <p>${rua}</p>
-    <p>${number}</p>
-  
+  <div>
+   <header>${title}</header>
+   <div id="poster-preview-${idMovie}" class="poster-preview">
+		</div>
+    <p>${genre}</p>
+    <p>${date}</p> 
+    <p>${description}</p>
+    
+    
 	</div>
   `;
+  const posterPreview = document.querySelector(`#poster-preview-${idMovie}`);
+  posterPreview.style.backgroundImage = `url(${addressImage})`;
 }
 
 function loadCards() {

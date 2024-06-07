@@ -21,7 +21,7 @@
 	<div id="add-form-modal" class="modal" />
 		<input type="text" id="search-movie" placeholder="Press enter to search for the movie">
 			<main id="main-content">
-				<div id="poster-preview" class="poster-preview-loading">
+				<div class="poster-preview">
 				</div>
 				<form onsubmit="createCard(event)">
 						<label for="title">Title</label>
@@ -32,6 +32,8 @@
 						<input type="text" name="date" id="date">
 						<label for="description">Description</label>
 						<input type="text" name="description" id="description">
+						<input type="hidden" name="addressImage" id="addressImage">
+						<input type="hidden" name="idMovie" id="idMovie">
 						<button>Insert Movie</button>
 				</form>
 			</main>
