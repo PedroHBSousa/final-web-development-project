@@ -187,6 +187,52 @@ const openEditModal = (event) => {
   const description = document.getElementById("edit-description");
   description.value = card.querySelector("p:nth-of-type(3)").innerText;
 
-  console.log(addressImage.value);
+  const idMovie = document.getElementById("edit-idMovie");
+  idMovie.value = event.currentTarget.closest(".card-ticker").id; 
+
+  const addressImage = document.getElementById("edit-addressImage");
+  addressImage.value = card.querySelector(".poster-preview").style.backgroundImage.replace('url("', "").replace('")', "");
+
   openModal("edit-form-modal");
 };
+function updateCard({title, genre, date, description, idMovie }){
+
+
+  const card = document.querySelector(`#${idMovie}`)
+	card.innerHTML = `
+			<div class="card-ticker" id="${idMovie}" onmouseenter="cardEnter(event)" onmouseleave="cardLeave(event)" >
+    <div>
+      <header>${title}</header>
+      <div id="poster-preview-${idMovie}" class="poster-preview">
+		  </div>
+      <p>${genre}</p>
+      <p>${date}</p> 
+      <p>${description}</p>
+	    </div>
+      <div class="card-menu">
+				<span>Editar</span>
+				<span onclick="removeCard(event)">Excluir</span>
+			</div>
+  </div>
+    `
+
+	const edit = card.querySelector('.card-ticker .card-menu span:first-child')
+	edit.addEventListener('click', openEditModal)
+} 
+
+const editCard = (event) =>{
+
+	event.preventDefault();
+	const formData = new FormData(event.target);
+	const movie = Object.fromEntries(formData);
+console.log(movie);
+	const card = document.getElementById(movie['edit-idMovie']); //erro pode estar aqui 
+  console.log(card);
+	card.setAttribute('id', movie.idMovie);
+	updateCard({
+		...movie,
+		description: +movie.description,
+		title: +movie.title,
+	})
+	closeModal(null, 'edit-form-modal')
+}
