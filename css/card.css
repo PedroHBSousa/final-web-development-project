@@ -1,5 +1,6 @@
 .card-ticker {
-  width: 230px;
+  width: 400px;
+  height: 800px;
   position: relative;
   /* height: fit-content; */
   background: #1d1d1d;
@@ -11,7 +12,7 @@
 .card-menu {
   display: none;
   position: absolute;
-  background: #253629;
+  background: #00000000;
   backdrop-filter: blur(10px);
   top: 0;
   right: 0;

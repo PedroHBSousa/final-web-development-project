@@ -9,9 +9,27 @@ const loader = document.querySelector(".loader");
 const addressImage = document.getElementById("addressImage");
 const idMovie = document.getElementById("idMovie");
 
-// const backgroundImage = document.getElementById("backgroundimage");
-// let addressImage = "";
-
+const allMovies = [
+  {
+    title: "The Shawshank Redemption",
+    genre: "Drama",
+    date: "14/10/1994",
+    description: "Two imprisoned",
+    idMovie: "278",
+    addressImage:
+      "https://image.tmdb.org/t/p/original/9cqNxx0GxF0bflZmeSMuL5tnGzr.jpg",
+  },
+  {
+    title: "The Godfather",
+    genre: "Crime",
+    date: "24/03/1972",
+    description:
+      "The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.",
+    idMovie: "238",
+    addressImage:
+      "https://image.tmdb.org/t/p/original/tmU7GeKVybMWFButWEGl2M4GeiP.jpg",
+  },
+];
 
 function convertToBrazilianDate(date) {
   const [year, month, day] = date.split("-");
@@ -22,7 +40,7 @@ const openModal = (idModal) => {
   const modal = document.getElementById(idModal);
   modal.style.display = "flex";
 };
-// ------------------- API VIACEP -------------------
+
 search.addEventListener("keydown", async (event) => {
   if (event.key === "Enter") {
     loader.classList.add("active");
@@ -49,7 +67,6 @@ search.addEventListener("keydown", async (event) => {
       );
       const detailsMovie = await responseDetails.json();
 
-
       title.value = detailsMovie.title;
       genre.value = detailsMovie.genres[0].name;
       idMovie.value = detailsMovie.id;
@@ -57,10 +74,9 @@ search.addEventListener("keydown", async (event) => {
       description.value = detailsMovie.overview;
       poster.style.backgroundImage = `url(https://image.tmdb.org/t/p/original${detailsMovie.poster_path})`;
 
-      addressImage.value = "https://image.tmdb.org/t/p/original"+detailsMovie.poster_path;
-      console.log(addressImage.value);
-
-    } catch (error) { 
+      addressImage.value =
+        "https://image.tmdb.org/t/p/original" + detailsMovie.poster_path;
+    } catch (error) {
       console.log(error);
       if (
         error instanceof TypeError &&
@@ -80,37 +96,59 @@ search.addEventListener("keydown", async (event) => {
 });
 
 function addCard({ title, genre, date, description, idMovie, addressImage }) {
-
   const main = document.querySelector("body > main");
 
   main.innerHTML += `
-  <div class="card-ticker" >
-  <div>
-   <header>${title}</header>
-   <div id="poster-preview-${idMovie}" class="poster-preview">
-		</div>
-    <p>${genre}</p>
-    <p>${date}</p> 
-    <p>${description}</p>
-    
-    
-	</div>
+  <div class="card-ticker" id="${idMovie}" onmouseenter="cardEnter(event)" onmouseleave="cardLeave(event)" >
+    <div>
+      <header>${title}</header>
+      <div id="poster-preview-${idMovie}" class="poster-preview">
+		  </div>
+      <p>${genre}</p>
+      <p>${date}</p> 
+      <p>${description}</p>
+	    </div>
+      <div class="card-menu">
+				<span>Editar</span>
+				<span onclick="removeCard(event)">Excluir</span>
+			</div>
+  </div>
   `;
   const posterPreview = document.querySelector(`#poster-preview-${idMovie}`);
   posterPreview.style.backgroundImage = `url(${addressImage})`;
+
+  const allEdit = main.querySelectorAll(
+    ".card-ticker .card-menu span:first-child"
+  );
+  allEdit.forEach((edit) => {
+    edit.addEventListener("click", openEditModal);
+  });
 }
 
 function loadCards() {
-  allAddresses.map((address) => addCard(address));
+  allMovies.map((movie) => addCard(movie));
 }
+const cardEnter = (event) => {
+  const cardMenu = event.target.querySelector(".card-menu");
+  cardMenu.style.display = "flex";
+};
+
+const cardLeave = (event) => {
+  const cardMenu = event.target.querySelector(".card-menu");
+  cardMenu.style.display = "none";
+};
+
+const removeCard = (event) => {
+  event.target.closest(".card-ticker").remove();
+};
 
 const createCard = (event) => {
   event.preventDefault();
 
   const formData = new FormData(event.target);
-  const address = Object.fromEntries(formData);
+  const movie = Object.fromEntries(formData);
 
-  addCard(address);
+  addCard(movie);
   event.target.reset();
   closeModal(null, "add-form-modal");
 };
@@ -133,4 +171,22 @@ const closeModal = (event, id) => {
     modal.style.display = "none";
     return;
   }
+};
+const openEditModal = (event) => {
+  const card = event.target.closest(".card-ticker");
+
+  const title = document.getElementById("edit-title");
+  title.value = card.querySelector("header").innerText;
+
+  const genre = document.getElementById("edit-genre");
+  genre.value = card.querySelector("p:first-of-type").innerText;
+
+  const date = document.getElementById("edit-date");
+  date.value = card.querySelector("p:nth-of-type(2)").innerText;
+
+  const description = document.getElementById("edit-description");
+  description.value = card.querySelector("p:nth-of-type(3)").innerText;
+
+  console.log(addressImage.value);
+  openModal("edit-form-modal");
 };
