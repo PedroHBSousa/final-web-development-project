@@ -104,17 +104,19 @@ function addCard({ title, genre, date, description, idMovie, addressImage }) {
 
   main.innerHTML += `
   <div class="card-ticker" id="${idMovie}" onmouseenter="cardEnter(event)" onmouseleave="cardLeave(event)" >
-    <div>
-      <img src="${addressImage}" id="poster-preview-${idMovie}" class="poster-preview">
-      <header>${title}</header>
+    <img src="${addressImage}" id="poster-preview-${idMovie}" class="poster-preview">
+    <div class="card-ticker-body">
+      <header class="card-ticker-title">${title}</header>
       <p>${genre}</p>
       <p>${date}</p> 
       <p class="truncate-3">${description}</p>
     </div>
+
     <div class="card-menu">
-      <span>Editar</span>
-      <span onclick="removeCard(event)">Excluir</span>
+      <span class="card-menu-button-edit">Edit</span>
+      <span class="card-menu-button-remove" onclick="removeCard(event)">Remove</span>
     </div>
+    
   </div>
   `;
 

@@ -52,12 +52,12 @@ label {
 .poster-preview {
   width: 100%;
   color: #aa1818;
-  font-size: 16px;
-  background-size: cover; /* Faz com que a imagem cubra todo o fundo da div */
-  background-position: center; /* Centraliza a imagem no fundo da div */
-  background-color: #1b1b1b;
+  background-size: cover; 
+  background-position: center;
+  background-color: #1b1b1b67;
   border-radius: 15px;
-}
+};
+
 #search-movie {
   width: 570px;
   padding: 5px 10px;
@@ -99,3 +99,4 @@ label {
   margin-top: 25px;
   width: 590px;
 }
+

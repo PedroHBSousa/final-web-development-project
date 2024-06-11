@@ -1,18 +1,22 @@
 .card-ticker {
-  width: 400px;
-  height: 800px;
+  width: 500px;
+
   position: relative;
-  /* height: fit-content; */
   background: #1d1d1d;
   border-radius: 20px;
-  padding: 16px;
+  /* padding: 16px; */
+  padding: 0;
+  overflow: hidden;
+
+
 }
 
 .card-menu {
   display: none;
   position: absolute;
-  background: #00000000;
-  backdrop-filter: blur(10px);
+  /* background: linear-gradient(to bottom, rgba(0, 0, 0, 0.226), rgba(0, 0, 0, 1)); */
+  /* background: linear-gradient(0deg, #1064a6 10%, transparent); */
+  backdrop-filter: blur(5px);
   top: 0;
   right: 0;
   left: 0;
@@ -22,74 +26,44 @@
   align-items: center;
   gap: 10px;
 }
-
+.card-ticker-body{
+  position: absolute;
+  padding: 10px;
+  bottom: 0;
+}
 .card-menu span {
   cursor: pointer;
   padding: 20px;
-}
-
-.card-ticker header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.card-ticker header h2 {
-  margin: 0;
-  font-size: 12px;
-}
-
-.card-ticker header h2 span {
-  font-weight: normal;
-  color: #7b7b7b;
-}
-
-.card-ticker header h1 {
-  margin: 0;
-  font-size: 14px;
-  font-weight: 500;
-}
-
-.card-ticker main p {
-  font-size: 32px;
-  margin: 16px 0 2px 0;
-}
-
-.card-ticker main span {
-  color: #7b7b7b;
-}
-
-.card-ticker main span:nth-child(2) {
-  background: #02bb2a;
-  padding: 3px 16px;
-  margin: 0 8px 0 0;
-  border-radius: 12px;
-  font-size: 14px;
-  color: #fff;
-}
-
-.card-ticker footer {
-  display: flex;
-  justify-content: space-between;
-  margin: 26px 0 0 0;
-}
-
-.card-ticker footer div:nth-child(2) {
-  text-align: right;
-}
-
-.card-ticker footer div p {
-  margin: 0;
-  font-size: 18px;
-}
-
-.card-ticker footer div span {
-  font-size: 14px;
-  color: #7b7b7b;
 }
 .truncate-3 {
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
+}
+.card-ticker-title{
+  font-size: 20px; 
+  font-weight: 600;
+}
+
+.card-menu-button-edit{
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 1px 1px 3px rgba(0,0,0,0.15);
+  background: #227de6;
+}
+.card-menu-button-remove {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 1px 1px 3px rgba(0,0,0,0.15);
+  background: #e62222;
+}
+.card-tricker-poster{
+  background: linear-gradient(0deg, #1064a6 10%, transparent);
 }
