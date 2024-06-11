@@ -14,6 +14,7 @@
   max-width: 600px;
   display: flex;
   justify-content: space-between;
+  width: 100%;
 }
 #main-content.hidden {
   display: none;
@@ -49,14 +50,12 @@ label {
 }
 
 .poster-preview {
-  width: 300px;
-  height: 450px;
+  width: 100%;
   color: #aa1818;
   font-size: 16px;
   background-size: cover; /* Faz com que a imagem cubra todo o fundo da div */
   background-position: center; /* Centraliza a imagem no fundo da div */
   background-color: #1b1b1b;
-  margin-right: 50px;
   border-radius: 15px;
 }
 #search-movie {

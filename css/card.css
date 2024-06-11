@@ -6,7 +6,6 @@
   background: #1d1d1d;
   border-radius: 20px;
   padding: 16px;
-  align-self: baseline;
 }
 
 .card-menu {
@@ -87,4 +86,10 @@
 .card-ticker footer div span {
   font-size: 14px;
   color: #7b7b7b;
+}
+.truncate-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }

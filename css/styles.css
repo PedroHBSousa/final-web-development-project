@@ -3,9 +3,9 @@ body {
   margin: 0;
   padding: 0;
   background: #242424;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   color: #fff;
+  font-family: "Rubik", sans-serif;
+  font-weight: 200;
   font-size: 1.1rem;
 }
 body > header {

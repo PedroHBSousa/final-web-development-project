@@ -20,14 +20,14 @@ const allMovies = [
       "https://image.tmdb.org/t/p/original/9cqNxx0GxF0bflZmeSMuL5tnGzr.jpg",
   },
   {
-    title: "The Godfather",
-    genre: "Crime",
-    date: "24/03/1972",
+    title: "Forest Gump",
+    genre: "Comedy",
+    date: "23/06/1994",
     description:
-      "The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.",
-    idMovie: "238",
+      "A man with a low IQ has accomplished great things in his life and been present during significant historic events—in each case, far exceeding what anyone imagined he could do. But despite all he has achieved, his one true love eludes him",
+    idMovie: "13",
     addressImage:
-      "https://image.tmdb.org/t/p/original/tmU7GeKVybMWFButWEGl2M4GeiP.jpg",
+      "https://image.tmdb.org/t/p/original/arw2vcBveWOVZr6pxd9XTd1TdQa.jpg",
   },
 ];
 
@@ -76,6 +76,7 @@ search.addEventListener("keydown", async (event) => {
 
       addressImage.value =
         "https://image.tmdb.org/t/p/original" + detailsMovie.poster_path;
+        console.log(detailsMovie);
     } catch (error) {
       console.log(error);
       if (
@@ -101,21 +102,18 @@ function addCard({ title, genre, date, description, idMovie, addressImage }) {
   main.innerHTML += `
   <div class="card-ticker" id="${idMovie}" onmouseenter="cardEnter(event)" onmouseleave="cardLeave(event)" >
     <div>
+      <img src="${addressImage}" id="poster-preview-${idMovie}" class="poster-preview">
       <header>${title}</header>
-      <div id="poster-preview-${idMovie}" class="poster-preview">
-		  </div>
       <p>${genre}</p>
       <p>${date}</p> 
-      <p>${description}</p>
-	    </div>
-      <div class="card-menu">
-				<span>Editar</span>
-				<span onclick="removeCard(event)">Excluir</span>
-			</div>
+      <p class="truncate-3">${description}</p>
+    </div>
+    <div class="card-menu">
+      <span>Editar</span>
+      <span onclick="removeCard(event)">Excluir</span>
+    </div>
   </div>
   `;
-  const posterPreview = document.querySelector(`#poster-preview-${idMovie}`);
-  posterPreview.style.backgroundImage = `url(${addressImage})`;
 
   const allEdit = main.querySelectorAll(
     ".card-ticker .card-menu span:first-child"
@@ -191,29 +189,26 @@ const openEditModal = (event) => {
   idMovie.value = event.currentTarget.closest(".card-ticker").id; 
 
   const addressImage = document.getElementById("edit-addressImage");
-  addressImage.value = card.querySelector(".poster-preview").style.backgroundImage.replace('url("', "").replace('")', "");
+  addressImage.value = card.querySelector(".poster-preview").getAttribute('src').replace('url("', "").replace('")', "");
 
   openModal("edit-form-modal");
 };
-function updateCard({title, genre, date, description, idMovie }){
+function updateCard({title, genre, date, description, idMovie, addressImage }){
 
+  const card = document.getElementById(idMovie);
 
-  const card = document.querySelector(`#${idMovie}`)
 	card.innerHTML = `
-			<div class="card-ticker" id="${idMovie}" onmouseenter="cardEnter(event)" onmouseleave="cardLeave(event)" >
-    <div>
-      <header>${title}</header>
-      <div id="poster-preview-${idMovie}" class="poster-preview">
-		  </div>
-      <p>${genre}</p>
-      <p>${date}</p> 
-      <p>${description}</p>
+      <div>
+        <img src="${addressImage}" id="poster-preview-${idMovie}" class="poster-preview">
+        <header>${title}</header>
+        <p>${genre}</p>
+        <p>${date}</p> 
+        <p class="truncate-3">${description}</p>
 	    </div>
       <div class="card-menu">
 				<span>Editar</span>
 				<span onclick="removeCard(event)">Excluir</span>
 			</div>
-  </div>
     `
 
 	const edit = card.querySelector('.card-ticker .card-menu span:first-child')
@@ -225,14 +220,10 @@ const editCard = (event) =>{
 	event.preventDefault();
 	const formData = new FormData(event.target);
 	const movie = Object.fromEntries(formData);
-console.log(movie);
-	const card = document.getElementById(movie['edit-idMovie']); //erro pode estar aqui 
-  console.log(card);
-	card.setAttribute('id', movie.idMovie);
-	updateCard({
-		...movie,
-		description: +movie.description,
-		title: +movie.title,
-	})
+	const card = document.getElementById(movie.idMovie); //erro pode estar aqui 
+  console.log(card, movie);
+
+	updateCard(movie);
+
 	closeModal(null, 'edit-form-modal')
 }

@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="../css/modal.css">
     <link rel="stylesheet" href="../css/card.css">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
 </head>
 <body onload="loadCards()">
     <header>
@@ -21,8 +23,7 @@
 	<div id="add-form-modal" class="modal" />
 		<input type="text" id="search-movie" placeholder="Press enter to search for the movie">
 			<main id="main-content">
-				<div class="poster-preview">
-				</div>
+				<div class="poster-preview" style="max-width: 300px;"></div>
 				<form onsubmit="createCard(event)">
 						<label for="title">Title</label>
 						<input type="text" name="title" id="title">
@@ -44,7 +45,7 @@
 		<main>
 			<form onsubmit="editCard(event)">
 				<label for="title">Title</label>
-				<input type="text" name="edit-title" id="edit-title">
+				<input type="text" name="title" id="edit-title">
 				<label for="genre">Genre</label>
 				<input type="text" name="genre" id="edit-genre">
 				<label for="date">Release Date</label>
@@ -52,7 +53,7 @@
 				<label for="description">Description</label>
 				<input type="text" name="description" id="edit-description">
 				<input type="hidden" name="addressImage" id="edit-addressImage">
-				<input type="hidden" name="edit-idMovie" id="edit-idMovie">
+				<input type="hidden" name="idMovie" id="edit-idMovie">
 				<button>Save Edit</button>
 			</form>
 		</main>
