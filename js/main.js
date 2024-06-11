@@ -60,35 +60,38 @@ search.addEventListener("keydown", async (event) => {
         options
       );
       const data = await responseID.json();
+      
+      if(data.results[0]) {
+       
 
-      const responseDetails = await fetch(
-        `https://api.themoviedb.org/3/movie/${data.results[0].id}?language=en-US'`,
-        options
-      );
-      const detailsMovie = await responseDetails.json();
+        const responseDetails = await fetch(
+          `https://api.themoviedb.org/3/movie/${data.results[0].id}?language=en-US'`,
+          options
+        );
 
-      title.value = detailsMovie.title;
-      genre.value = detailsMovie.genres[0].name;
-      idMovie.value = detailsMovie.id;
-      releaseDate.value = convertToBrazilianDate(detailsMovie.release_date);
-      description.value = detailsMovie.overview;
-      poster.style.backgroundImage = `url(https://image.tmdb.org/t/p/original${detailsMovie.poster_path})`;
+        const detailsMovie = await responseDetails.json();
 
-      addressImage.value =
-        "https://image.tmdb.org/t/p/original" + detailsMovie.poster_path;
-        console.log(detailsMovie);
-    } catch (error) {
-      console.log(error);
-      if (
-        error instanceof TypeError &&
-        error.message.includes(
-          "Cannot read properties of undefined (reading 'id')"
-        )
-      ) {
+        title.value = detailsMovie.title;
+        genre.value = detailsMovie.genres[0].name;
+        idMovie.value = detailsMovie.id;
+        releaseDate.value = convertToBrazilianDate(detailsMovie.release_date);
+        description.value = detailsMovie.overview;
+        poster.style.backgroundImage = `url(https://image.tmdb.org/t/p/original${detailsMovie.poster_path})`;
+
+        addressImage.value =
+          "https://image.tmdb.org/t/p/original" + detailsMovie.poster_path;
+          console.log(detailsMovie);
+      } else {
         alert(
           "Erro: O filme digitado não foi encontrado. Por favor, tente novamente ou digite outro filme."
         );
       }
+    } catch (error) {
+      console.log(error);
+
+      alert(
+        "Problema Interno"
+      );
     } finally {
       loader.classList.remove("active");
       main.classList.remove("hidden");
