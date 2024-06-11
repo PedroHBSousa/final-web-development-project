@@ -1,14 +1,12 @@
 .card-ticker {
-  width: 500px;
-
+  width: 400px;
+  height: 610px;
   position: relative;
   background: #1d1d1d;
   border-radius: 20px;
   /* padding: 16px; */
   padding: 0;
   overflow: hidden;
-
-
 }
 
 .card-menu {
@@ -16,6 +14,7 @@
   position: absolute;
   /* background: linear-gradient(to bottom, rgba(0, 0, 0, 0.226), rgba(0, 0, 0, 1)); */
   /* background: linear-gradient(0deg, #1064a6 10%, transparent); */
+  background: rgba(0, 0, 0, 0.137);
   backdrop-filter: blur(5px);
   top: 0;
   right: 0;
@@ -26,9 +25,9 @@
   align-items: center;
   gap: 10px;
 }
-.card-ticker-body{
+.card-ticker-body {
   position: absolute;
-  padding: 10px;
+  padding: 20px;
   bottom: 0;
 }
 .card-menu span {
@@ -41,18 +40,18 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
-.card-ticker-title{
-  font-size: 20px; 
+.card-ticker-title {
+  font-size: 20px;
   font-weight: 600;
 }
 
-.card-menu-button-edit{
+.card-menu-button-edit {
   cursor: pointer;
   display: flex;
   align-items: center;
   border: none;
   border-radius: 5px;
-  box-shadow: 1px 1px 3px rgba(0,0,0,0.15);
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.15);
   background: #227de6;
 }
 .card-menu-button-remove {
@@ -61,9 +60,24 @@
   align-items: center;
   border: none;
   border-radius: 5px;
-  box-shadow: 1px 1px 3px rgba(0,0,0,0.15);
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.15);
   background: #e62222;
 }
-.card-tricker-poster{
+.card-tricker-poster {
   background: linear-gradient(0deg, #1064a6 10%, transparent);
+}
+
+.gradient-overlay::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.014),
+    rgba(0, 0, 0, 1)
+  );
+  border-radius: 15px;
 }

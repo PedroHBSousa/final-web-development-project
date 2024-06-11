@@ -60,10 +60,8 @@ search.addEventListener("keydown", async (event) => {
         options
       );
       const data = await responseID.json();
-      
-      if(data.results[0]) {
-       
 
+      if (data.results[0]) {
         const responseDetails = await fetch(
           `https://api.themoviedb.org/3/movie/${data.results[0].id}?language=en-US'`,
           options
@@ -80,7 +78,7 @@ search.addEventListener("keydown", async (event) => {
 
         addressImage.value =
           "https://image.tmdb.org/t/p/original" + detailsMovie.poster_path;
-          console.log(detailsMovie);
+        console.log(detailsMovie);
       } else {
         alert(
           "Erro: O filme digitado não foi encontrado. Por favor, tente novamente ou digite outro filme."
@@ -89,9 +87,7 @@ search.addEventListener("keydown", async (event) => {
     } catch (error) {
       console.log(error);
 
-      alert(
-        "Problema Interno"
-      );
+      alert("Problema Interno");
     } finally {
       loader.classList.remove("active");
       main.classList.remove("hidden");
@@ -104,7 +100,10 @@ function addCard({ title, genre, date, description, idMovie, addressImage }) {
 
   main.innerHTML += `
   <div class="card-ticker" id="${idMovie}" onmouseenter="cardEnter(event)" onmouseleave="cardLeave(event)" >
-    <img src="${addressImage}" id="poster-preview-${idMovie}" class="poster-preview">
+  <div class="gradient-overlay"> 
+ <img src="${addressImage}" id="poster-preview-${idMovie}" class="poster-preview">
+  </div>
+   
     <div class="card-ticker-body">
       <header class="card-ticker-title">${title}</header>
       <p>${genre}</p>
@@ -191,18 +190,28 @@ const openEditModal = (event) => {
   description.value = card.querySelector("p:nth-of-type(3)").innerText;
 
   const idMovie = document.getElementById("edit-idMovie");
-  idMovie.value = event.currentTarget.closest(".card-ticker").id; 
+  idMovie.value = event.currentTarget.closest(".card-ticker").id;
 
   const addressImage = document.getElementById("edit-addressImage");
-  addressImage.value = card.querySelector(".poster-preview").getAttribute('src').replace('url("', "").replace('")', "");
+  addressImage.value = card
+    .querySelector(".poster-preview")
+    .getAttribute("src")
+    .replace('url("', "")
+    .replace('")', "");
 
   openModal("edit-form-modal");
 };
-function updateCard({title, genre, date, description, idMovie, addressImage }){
-
+function updateCard({
+  title,
+  genre,
+  date,
+  description,
+  idMovie,
+  addressImage,
+}) {
   const card = document.getElementById(idMovie);
 
-	card.innerHTML = `
+  card.innerHTML = `
       <div>
         <img src="${addressImage}" id="poster-preview-${idMovie}" class="poster-preview">
         <header>${title}</header>
@@ -214,21 +223,20 @@ function updateCard({title, genre, date, description, idMovie, addressImage }){
 				<span>Editar</span>
 				<span onclick="removeCard(event)">Excluir</span>
 			</div>
-    `
+    `;
 
-	const edit = card.querySelector('.card-ticker .card-menu span:first-child')
-	edit.addEventListener('click', openEditModal)
-} 
+  const edit = card.querySelector(".card-ticker .card-menu span:first-child");
+  edit.addEventListener("click", openEditModal);
+}
 
-const editCard = (event) =>{
-
-	event.preventDefault();
-	const formData = new FormData(event.target);
-	const movie = Object.fromEntries(formData);
-	const card = document.getElementById(movie.idMovie); //erro pode estar aqui 
+const editCard = (event) => {
+  event.preventDefault();
+  const formData = new FormData(event.target);
+  const movie = Object.fromEntries(formData);
+  const card = document.getElementById(movie.idMovie); //erro pode estar aqui
   console.log(card, movie);
 
-	updateCard(movie);
+  updateCard(movie);
 
-	closeModal(null, 'edit-form-modal')
-}
+  closeModal(null, "edit-form-modal");
+};

@@ -6,7 +6,8 @@ body {
   color: #fff;
   font-family: "Noto Sans", sans-serif;
   font-weight: 200;
-  font-size: 1.1rem;
+  /* font-size: 1.1rem; */
+  font-size: 15px;
 }
 body > header {
   height: 70px;
