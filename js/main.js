@@ -8,13 +8,14 @@ const main = document.querySelector("#main-content");
 const loader = document.querySelector(".loader");
 const addressImage = document.getElementById("addressImage");
 const idMovie = document.getElementById("idMovie");
+const runTime = document.getElementById("runtime");
 
 const allMovies = [
   {
     title: "The Shawshank Redemption",
     genre: "Drama",
-    date: "14/10/1994",
-    description: "Two imprisoned",
+    date: "1994",
+    description: "Imprisoned in the 1940s for the double murder of his wife and her lover, upstanding banker Andy Dufresne begins a new life at the Shawshank prison, where he puts his accounting skills to work for an amoral warden. During his long stretch in prison, Dufresne comes to be admired by the other inmates -- including an older prisoner named Red -- for his integrity and unquenchable sense of hope.d",
     idMovie: "278",
     addressImage:
       "https://image.tmdb.org/t/p/original/9cqNxx0GxF0bflZmeSMuL5tnGzr.jpg",
@@ -22,7 +23,7 @@ const allMovies = [
   {
     title: "Forest Gump",
     genre: "Comedy",
-    date: "23/06/1994",
+    date: "1994",
     description:
       "A man with a low IQ has accomplished great things in his life and been present during significant historic events—in each case, far exceeding what anyone imagined he could do. But despite all he has achieved, his one true love eludes him",
     idMovie: "13",
@@ -33,7 +34,17 @@ const allMovies = [
 
 function convertToBrazilianDate(date) {
   const [year, month, day] = date.split("-");
-  return `${day}/${month}/${year}`;
+  return `${year}`;
+}
+
+function converterMinutosParaHoras(minutes) {
+  var minutos = parseInt(minutes);
+
+  var horas = Math.floor(minutos / 60);
+  var minutosRestantes = minutos % 60;
+
+  var resultado = horas + "h " + minutosRestantes + "m";
+  return resultado;
 }
 
 const openModal = (idModal) => {
@@ -75,6 +86,7 @@ search.addEventListener("keydown", async (event) => {
         releaseDate.value = convertToBrazilianDate(detailsMovie.release_date);
         description.value = detailsMovie.overview;
         poster.style.backgroundImage = `url(https://image.tmdb.org/t/p/original${detailsMovie.poster_path})`;
+        runTime.value = converterMinutosParaHoras(detailsMovie.runtime);
 
         addressImage.value =
           "https://image.tmdb.org/t/p/original" + detailsMovie.poster_path;
@@ -95,7 +107,7 @@ search.addEventListener("keydown", async (event) => {
   }
 });
 
-function addCard({ title, genre, date, description, idMovie, addressImage }) {
+function addCard({ title, genre, date, description, runtime, idMovie, addressImage }) {
   const main = document.querySelector("body > main");
 
   main.innerHTML += `
@@ -105,9 +117,9 @@ function addCard({ title, genre, date, description, idMovie, addressImage }) {
   </div>
    
     <div class="card-ticker-body">
-      <header class="card-ticker-title">${title}</header>
+      <header class="card-ticker-title">${title} <span>${date}</span></header>
       <p>${genre}</p>
-      <p>${date}</p> 
+      <p>${runtime}</p>
       <p class="truncate-3">${description}</p>
     </div>
 
