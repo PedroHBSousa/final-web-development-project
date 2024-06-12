@@ -1,0 +1,28 @@
+<div
+  class="card-ticker"
+  id="${idMovie}"
+  onmouseenter="cardEnter(event)"
+  onmouseleave="cardLeave(event)"
+>
+  <div class="gradient-overlay">
+    <img
+      src="${addressImage}"
+      id="poster-preview-${idMovie}"
+      class="poster-preview"
+    />
+  </div>
+
+  <div class="card-ticker-body">
+    <header class="card-ticker-title">${title} <span>${date}</span></header>
+    <p>${genre}</p>
+    <p>${runtime}</p>
+    <p class="truncate-3">${description}</p>
+  </div>
+
+  <div class="card-menu">
+    <span class="card-menu-button-edit">Edit</span>
+    <span class="card-menu-button-remove" onclick="removeCard(event)"
+      >Remove</span
+    >
+  </div>
+</div>

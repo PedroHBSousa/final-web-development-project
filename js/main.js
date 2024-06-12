@@ -17,6 +17,7 @@ const allMovies = [
     date: "1994",
     description: "Imprisoned in the 1940s for the double murder of his wife and her lover, upstanding banker Andy Dufresne begins a new life at the Shawshank prison, where he puts his accounting skills to work for an amoral warden. During his long stretch in prison, Dufresne comes to be admired by the other inmates -- including an older prisoner named Red -- for his integrity and unquenchable sense of hope.d",
     idMovie: "278",
+    runtime: "2h 22m",
     addressImage:
       "https://image.tmdb.org/t/p/original/9cqNxx0GxF0bflZmeSMuL5tnGzr.jpg",
   },
@@ -27,6 +28,7 @@ const allMovies = [
     description:
       "A man with a low IQ has accomplished great things in his life and been present during significant historic events—in each case, far exceeding what anyone imagined he could do. But despite all he has achieved, his one true love eludes him",
     idMovie: "13",
+    runtime: "2h 22m",
     addressImage:
       "https://image.tmdb.org/t/p/original/arw2vcBveWOVZr6pxd9XTd1TdQa.jpg",
   },
@@ -111,28 +113,31 @@ function addCard({ title, genre, date, description, runtime, idMovie, addressIma
   const main = document.querySelector("body > main");
 
   main.innerHTML += `
-  <div class="card-ticker" id="${idMovie}" onmouseenter="cardEnter(event)" onmouseleave="cardLeave(event)" >
-  <div class="gradient-overlay"> 
- <img src="${addressImage}" id="poster-preview-${idMovie}" class="poster-preview">
-  </div>
-   
-    <div class="card-ticker-body">
-      <header class="card-ticker-title">${title} <span>${date}</span></header>
-      <p>${genre}</p>
-      <p>${runtime}</p>
-      <p class="truncate-3">${description}</p>
+  <div class="movie_card" id="${idMovie}" onmouseenter="cardEnter(event)" onmouseleave="cardLeave(event)">
+    <div class="info_section">
+      <div class="movie_header">
+        <img class="locandina" src="${addressImage}"/>
+        <h1>${title}</h1>
+        <h4>${date}</h4>
+        <span class="minutes">${runtime}</span>
+        <p class="type">${genre}</p>
     </div>
-
-    <div class="card-menu">
-      <span class="card-menu-button-edit">Edit</span>
-      <span class="card-menu-button-remove" onclick="removeCard(event)">Remove</span>
+    <div class="movie_desc">
+      <p class="text">
+        ${description}
+      </p>
     </div>
-    
   </div>
+  <div class="blur_back" style="background-image: url('${addressImage}')"></div>
+  <div class="card-menu">
+    <span class="card-menu-button-edit">Edit</span>
+    <span class="card-menu-button-remove" onclick="removeCard(event)">Remove</span>
+  </div>
+</div>
   `;
 
   const allEdit = main.querySelectorAll(
-    ".card-ticker .card-menu span:first-child"
+    ".movie_card .card-menu span:first-child"
   );
   allEdit.forEach((edit) => {
     edit.addEventListener("click", openEditModal);
@@ -153,7 +158,7 @@ const cardLeave = (event) => {
 };
 
 const removeCard = (event) => {
-  event.target.closest(".card-ticker").remove();
+  event.target.closest(".movie_card").remove();
 };
 
 const createCard = (event) => {
@@ -187,30 +192,26 @@ const closeModal = (event, id) => {
   }
 };
 const openEditModal = (event) => {
-  const card = event.target.closest(".card-ticker");
+  const card = event.target.closest(".movie_card");
 
   const title = document.getElementById("edit-title");
-  title.value = card.querySelector("header").innerText;
+  title.value = card.querySelector(".movie_header h1").innerText;
 
   const genre = document.getElementById("edit-genre");
-  genre.value = card.querySelector("p:first-of-type").innerText;
+  genre.value = card.querySelector(".movie_header .type").innerText;
 
   const date = document.getElementById("edit-date");
-  date.value = card.querySelector("p:nth-of-type(2)").innerText;
+  date.value = card.querySelector(".movie_header h4").innerText;
 
   const description = document.getElementById("edit-description");
-  description.value = card.querySelector("p:nth-of-type(3)").innerText;
+  description.value = card.querySelector(".movie_desc .text").innerText;
 
   const idMovie = document.getElementById("edit-idMovie");
-  idMovie.value = event.currentTarget.closest(".card-ticker").id;
+  idMovie.value = card.id;
 
   const addressImage = document.getElementById("edit-addressImage");
-  addressImage.value = card
-    .querySelector(".poster-preview")
-    .getAttribute("src")
-    .replace('url("', "")
-    .replace('")', "");
-
+  addressImage.value = card.querySelector(".locandina").getAttribute("src");
+  
   openModal("edit-form-modal");
 };
 function updateCard({

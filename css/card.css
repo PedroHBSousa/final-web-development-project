@@ -1,14 +1,122 @@
-.card-ticker {
-  width: 24%;
-  height: 610px;
+.movie_card{
   position: relative;
-  background: #1d1d1d;
-  border-radius: 20px;
-  /* padding: 16px; */
-  padding: 0;
+  display: block;
+  width: 800px;
+  height: 400px;
+  margin: 100px auto; 
   overflow: hidden;
+  border-radius: 10px;
+  transition: all 0.4s;
+  &:hover{
+    transform: scale(1.02);
+    transition: all 0.4s;
+  }
+  .info_section{
+    position: relative;
+    width: 100%;
+    height: 100%;
+	  background-blend-mode: multiply;
+    z-index: 2;
+    border-radius: 10px;
+    .movie_header{
+      position: relative;
+      padding: 25px;
+      height: 40%;
+      width: 100%;
+      h1{
+        color: #fff;
+        font-weight: 400;
+        
+      }
+      h4{
+        color: #9ac7fa;
+        font-weight: 400;
+      }
+      .minutes{
+        display: inline-block;
+        margin-top: 10px;
+        color: #fff;
+        padding: 5px;
+        border-radius: 5px;
+        border: 1px solid rgba(255,255,255,0.13);
+      }
+      .type{
+        display: inline-block;
+        color: #cee4fd;
+        margin-left: 10px;
+      }
+      .locandina{
+        position: relative;
+        float: left;
+        margin-right: 20px;
+        height: 120px;
+        box-shadow: 0 0 20px -10px rgba(0,0,0,0.5);
+      }
+    }
+    .movie_desc{
+      padding: 25px;
+      height: 50%;
+      .text{
+        color: #cfd6e1;
+        display: -webkit-box;
+        -webkit-line-clamp: 5;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+    }
+    .movie_social{
+      height: 10%;
+      padding-left: 15px;
+      padding-bottom: 20px;
+      ul{
+        list-style: none;
+        padding: 0;
+        li{
+          display: inline-block;
+          color: rgba(255,255,255,0.4);
+          transition: color 0.3s;
+          transition-delay: 0.15s;
+          margin: 0 10px;
+          &:hover{
+            transition: color 0.3s;
+            color: rgba(255,255,255,0.8);
+          }
+          i{
+            font-size: 19px;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+  .blur_back{
+    position: absolute;
+    top: 0;
+    z-index: 1;
+    height: 100%; right: 0;
+    background-size: cover;
+    border-radius: 11px;
+  }
 }
 
+@media screen and (min-width: 768px) {
+  .movie_header{
+    width: 60%;
+  }
+  
+  .movie_desc{
+    width: 50%;
+  }
+  
+  .info_section{
+    background: linear-gradient(to right, #0d0d0c 50%, transparent 100%);
+  }
+  
+  .blur_back{
+    width: 80%;
+    background-position: -100% 10% !important;  
+  }
+}
 .card-menu {
   display: none;
   position: absolute;
@@ -24,26 +132,9 @@
   justify-content: center;
   align-items: center;
   gap: 10px;
+  z-index: 3;
 }
-.card-ticker-body {
-  position: absolute;
-  padding: 20px;
-  bottom: 0;
-}
-.card-menu span {
-  cursor: pointer;
-  padding: 20px;
-}
-.truncate-3 {
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-.card-ticker-title {
-  font-size: 20px;
-  font-weight: 600;
-}
+
 
 .card-menu-button-edit {
   cursor: pointer;
@@ -62,26 +153,4 @@
   border-radius: 5px;
   box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.15);
   background: #e62222;
-}
-.card-tricker-poster {
-  background: linear-gradient(0deg, #1064a6 10%, transparent);
-}
-
-.gradient-overlay::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0.014),
-    rgba(0, 0, 0, 1)
-  );
-  border-radius: 15px;
-}
-
-.card-ticker-title span {
-  font-weight: 200;
 }

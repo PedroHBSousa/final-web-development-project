@@ -9,6 +9,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  z-index: 3;
 }
 #main-content {
   max-width: 600px;
@@ -33,7 +34,7 @@
   margin: 20px 0 0 0;
 }
 
-input[type="text"] {
+/* input[type="text"] {
   padding: 5px 10px;
   border-radius: 10px;
   font-size: 18px;
@@ -41,7 +42,7 @@ input[type="text"] {
   border: none;
   background: #333333;
   color: #fff;
-}
+} */
 .modal main h2 {
   margin: 0;
 }
