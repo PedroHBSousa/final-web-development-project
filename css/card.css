@@ -120,23 +120,18 @@
 .card-menu {
   display: none;
   position: absolute;
-  /* background: linear-gradient(to bottom, rgba(0, 0, 0, 0.226), rgba(0, 0, 0, 1)); */
-  /* background: linear-gradient(0deg, #1064a6 10%, transparent); */
   background: rgba(0, 0, 0, 0.137);
-  backdrop-filter: blur(5px);
+  backdrop-filter: blur(2px);
   top: 0;
   right: 0;
   left: 0;
   bottom: 0;
-  border-radius: 20px;
   justify-content: center;
   align-items: center;
   gap: 10px;
-  z-index: 3;
+  z-index: 2;
 }
-
-
-.card-menu-button-edit {
+/* .card-menu-button-edit {
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -153,4 +148,9 @@
   border-radius: 5px;
   box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.15);
   background: #e62222;
+} */
+.card-menu span{
+	cursor: pointer;
+	padding: 20px;
 }
+

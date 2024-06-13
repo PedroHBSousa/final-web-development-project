@@ -1,11 +1,11 @@
-const search = document.getElementById("search-movie");
+const searchButton = document.getElementById("search-button");
+const searchInput = document.getElementById("search-movie");
 const title = document.getElementById("title");
 const genre = document.getElementById("genre");
 const releaseDate = document.getElementById("date");
 const description = document.getElementById("description");
 const poster = document.querySelector(".poster-preview");
 const main = document.querySelector("#main-content");
-const loader = document.querySelector(".loader");
 const addressImage = document.getElementById("addressImage");
 const idMovie = document.getElementById("idMovie");
 const runTime = document.getElementById("runtime");
@@ -54,9 +54,7 @@ const openModal = (idModal) => {
   modal.style.display = "flex";
 };
 
-search.addEventListener("keydown", async (event) => {
-  if (event.key === "Enter") {
-    loader.classList.add("active");
+searchButton.addEventListener("click", async (event) => {
     main.classList.add("hidden");
     try {
       const options = {
@@ -69,7 +67,7 @@ search.addEventListener("keydown", async (event) => {
       };
 
       const responseID = await fetch(
-        `https://api.themoviedb.org/3/search/movie?query=${search.value}&include_adult=false`,
+        `https://api.themoviedb.org/3/search/movie?query=${searchInput.value}&include_adult=false`,
         options
       );
       const data = await responseID.json();
@@ -103,11 +101,11 @@ search.addEventListener("keydown", async (event) => {
 
       alert("Problema Interno");
     } finally {
-      loader.classList.remove("active");
       main.classList.remove("hidden");
+      openModal('add-form-modal');
     }
-  }
 });
+
 
 function addCard({ title, genre, date, description, runtime, idMovie, addressImage }) {
   const main = document.querySelector("body > main");
