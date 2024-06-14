@@ -150,6 +150,39 @@ function addCard({
   });
 }
 
+function openEditSchedule (day) {
+  document.getElementById('overlay').style.display = 'flex';
+  document.getElementById('day-title').innerText = day.charAt(0).toUpperCase() + day.slice(1);
+  currentDay = day;
+
+  const radioInputDiv = document.getElementById('radio-input');
+  radioInputDiv.innerHTML = ''; // Limpa as opções anteriores
+
+  allMovies.forEach((movie, index) => {
+      const label = document.createElement('label');
+      label.classList.add('label');
+
+      const input = document.createElement('input');
+      input.type = 'radio';
+      input.name = 'movie-radio';
+      input.value = index;
+      input.id = `movie-${index}`;
+      input.onclick = () => selectedMovie = movie;
+
+      const text = document.createElement('p');
+      text.classList.add('text');
+      text.innerText = movie.title;
+
+      label.appendChild(input);
+      label.appendChild(text);
+      radioInputDiv.appendChild(label);
+  });
+}
+function closeEditSchedule() {
+
+  document.getElementById('overlay').style.display = 'none';
+}
+
 function loadCards() {
   allMovies.map((movie) => addCard(movie));
 }

@@ -132,24 +132,7 @@
   gap: 10px;
   z-index: 2;
 }
-/* .card-menu-button-edit {
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  border: none;
-  border-radius: 5px;
-  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.15);
-  background: #227de6;
-}
-.card-menu-button-remove {
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  border: none;
-  border-radius: 5px;
-  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.15);
-  background: #e62222;
-} */
+
 .card-menu span {
   cursor: pointer;
   padding: 20px;

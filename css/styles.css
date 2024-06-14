@@ -55,6 +55,7 @@ body > main {
   justify-content: flex-start;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
+
 }
 body > main::-webkit-scrollbar {
   width: 0;

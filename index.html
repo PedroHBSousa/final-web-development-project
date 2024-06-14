@@ -43,18 +43,18 @@
 				<header class="frame-header">
 					<h2>Monday</h2>
 				</header>
-				<div class="book">
-					<button class="accept">
-            Change
-        </button>
-					<button>Remove</button>
-					<div class="cover">
-						<img src="https://image.tmdb.org/t/p/original/9cqNxx0GxF0bflZmeSMuL5tnGzr.jpg">		
+				<div class="card">
+					<img src="https://image.tmdb.org/t/p/original/9cqNxx0GxF0bflZmeSMuL5tnGzr.jpg">
+					<div class="card__content">
+					  <p class="card__title">Card Title</p>
+					  <p class="card__description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+					  <div class="card-button-container">
+						<button class="button-change" onclick="openEditSchedule('monday')">Change</button> 
+					  	<button class="button-watched">Watched</button>
+					  </div>
 					</div>
-				 </div>
-				 <h1>ShawnsShank</h1>
+				  </div>
 			</div>
-
 		</div>
 	</section>
 	<div id="add-form-modal" class="modal">
@@ -95,7 +95,19 @@
 			</form>
 		</main>
 	</div>
-
+	<div id="overlay" class="overlay">
+		<div class="overlay-content">
+			<span class="close-button" onclick="closeEditSchedule()">&times;</span>
+			<h2 style="color:rgb(255, 255, 255)">Choose a new movie for <span id="day-title"></span></h2>
+			<div  id="radio-input" class="radio-input">
+				<!-- <label class="label">
+				  <input value="value-1" name="value-radio" checked="" id="value-1" type="radio"/>
+				  <p class="text">Designer</p>
+				</label> -->
+			<button onclick="confirmSelection()">Confirm</button>
+			</div>
+		</div>
+	</div>
     <script src="./js/main.js"></script>
 </body>
 </html>
