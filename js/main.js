@@ -15,7 +15,8 @@ const allMovies = [
     title: "The Shawshank Redemption",
     genre: "Drama",
     date: "1994",
-    description: "Imprisoned in the 1940s for the double murder of his wife and her lover, upstanding banker Andy Dufresne begins a new life at the Shawshank prison, where he puts his accounting skills to work for an amoral warden. During his long stretch in prison, Dufresne comes to be admired by the other inmates -- including an older prisoner named Red -- for his integrity and unquenchable sense of hope.d",
+    description:
+      "Imprisoned in the 1940s for the double murder of his wife and her lover, upstanding banker Andy Dufresne begins a new life at the Shawshank prison, where he puts his accounting skills to work for an amoral warden. During his long stretch in prison, Dufresne comes to be admired by the other inmates -- including an older prisoner named Red -- for his integrity and unquenchable sense of hope.d",
     idMovie: "278",
     runtime: "2h 22m",
     addressImage:
@@ -55,59 +56,66 @@ const openModal = (idModal) => {
 };
 
 searchButton.addEventListener("click", async (event) => {
-    main.classList.add("hidden");
-    try {
-      const options = {
-        method: "GET",
-        headers: {
-          accept: "application/json",
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5ZmM3ZWNiMGYzOWZhMDc3Y2E1YWIzZjNhZTU2NmFjMCIsInN1YiI6IjY2NWZhZmIxMzU1MjFlZjc4MmI0YTI2OCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.v68XA_FTrnGRuhqWgdaqieJgz8wI8WqywfEauczlFIs",
-        },
-      };
+  main.classList.add("hidden");
+  try {
+    const options = {
+      method: "GET",
+      headers: {
+        accept: "application/json",
+        Authorization:
+          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5ZmM3ZWNiMGYzOWZhMDc3Y2E1YWIzZjNhZTU2NmFjMCIsInN1YiI6IjY2NWZhZmIxMzU1MjFlZjc4MmI0YTI2OCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.v68XA_FTrnGRuhqWgdaqieJgz8wI8WqywfEauczlFIs",
+      },
+    };
 
-      const responseID = await fetch(
-        `https://api.themoviedb.org/3/search/movie?query=${searchInput.value}&include_adult=false`,
+    const responseID = await fetch(
+      `https://api.themoviedb.org/3/search/movie?query=${searchInput.value}&include_adult=false`,
+      options
+    );
+    const data = await responseID.json();
+
+    if (data.results[0]) {
+      const responseDetails = await fetch(
+        `https://api.themoviedb.org/3/movie/${data.results[0].id}?language=en-US'`,
         options
       );
-      const data = await responseID.json();
 
-      if (data.results[0]) {
-        const responseDetails = await fetch(
-          `https://api.themoviedb.org/3/movie/${data.results[0].id}?language=en-US'`,
-          options
-        );
+      const detailsMovie = await responseDetails.json();
 
-        const detailsMovie = await responseDetails.json();
+      title.value = detailsMovie.title;
+      genre.value = detailsMovie.genres[0].name;
+      idMovie.value = detailsMovie.id;
+      releaseDate.value = convertToBrazilianDate(detailsMovie.release_date);
+      description.value = detailsMovie.overview;
+      poster.style.backgroundImage = `url(https://image.tmdb.org/t/p/original${detailsMovie.poster_path})`;
+      runTime.value = converterMinutosParaHoras(detailsMovie.runtime);
 
-        title.value = detailsMovie.title;
-        genre.value = detailsMovie.genres[0].name;
-        idMovie.value = detailsMovie.id;
-        releaseDate.value = convertToBrazilianDate(detailsMovie.release_date);
-        description.value = detailsMovie.overview;
-        poster.style.backgroundImage = `url(https://image.tmdb.org/t/p/original${detailsMovie.poster_path})`;
-        runTime.value = converterMinutosParaHoras(detailsMovie.runtime);
-
-        addressImage.value =
-          "https://image.tmdb.org/t/p/original" + detailsMovie.poster_path;
-        console.log(detailsMovie);
-      } else {
-        alert(
-          "Erro: O filme digitado não foi encontrado. Por favor, tente novamente ou digite outro filme."
-        );
-      }
-    } catch (error) {
-      console.log(error);
-
-      alert("Problema Interno");
-    } finally {
-      main.classList.remove("hidden");
-      openModal('add-form-modal');
+      addressImage.value =
+        "https://image.tmdb.org/t/p/original" + detailsMovie.poster_path;
+      console.log(detailsMovie);
+    } else {
+      alert(
+        "Erro: O filme digitado não foi encontrado. Por favor, tente novamente ou digite outro filme."
+      );
     }
+  } catch (error) {
+    console.log(error);
+
+    alert("Problema Interno");
+  } finally {
+    main.classList.remove("hidden");
+    openModal("add-form-modal");
+  }
 });
 
-
-function addCard({ title, genre, date, description, runtime, idMovie, addressImage }) {
+function addCard({
+  title,
+  genre,
+  date,
+  description,
+  runtime,
+  idMovie,
+  addressImage,
+}) {
   const main = document.querySelector("body > main");
 
   main.innerHTML += `
@@ -209,7 +217,7 @@ const openEditModal = (event) => {
 
   const addressImage = document.getElementById("edit-addressImage");
   addressImage.value = card.querySelector(".locandina").getAttribute("src");
-  
+
   openModal("edit-form-modal");
 };
 function updateCard({
@@ -251,3 +259,28 @@ const editCard = (event) => {
 
   closeModal(null, "edit-form-modal");
 };
+document.addEventListener("DOMContentLoaded", () => {
+  const container = document.getElementById("container-movies");
+  let scrollInterval;
+
+  container.addEventListener("mousemove", (event) => {
+    const containerRect = container.getBoundingClientRect();
+    const mouseX = event.clientX - containerRect.left;
+
+    clearInterval(scrollInterval);
+
+    if (mouseX < 300) {
+      scrollInterval = setInterval(() => {
+        container.scrollLeft -= 10;
+      }, 10); // Aproximadamente 60fps
+    } else if (mouseX > containerRect.width - 300) {
+      scrollInterval = setInterval(() => {
+        container.scrollLeft += 10;
+      }, 10); // Aproximadamente 60fps
+    }
+  });
+
+  container.addEventListener("mouseleave", () => {
+    clearInterval(scrollInterval);
+  });
+});

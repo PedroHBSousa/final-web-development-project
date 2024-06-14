@@ -15,6 +15,7 @@ body > header {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  font-weight: 400;
 }
 nav ul {
   display: flex;
@@ -46,12 +47,15 @@ body > footer {
   align-items: center;
 }
 body > main {
-  min-height: calc(100vh - 302px);
+  margin: 0;
+  /* min-height: calc(100vh - 302px); */
   padding: 16px;
   display: flex;
-  gap: 16px;
-  flex-wrap: wrap;
-  justify-content: center;
-
+  gap: 30px;
+  justify-content: flex-start;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
 }
-
+body > main::-webkit-scrollbar {
+  width: 0;
+}

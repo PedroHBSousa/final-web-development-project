@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Final Project</title>
-    <link rel="stylesheet" href="../css/styles.css">
-    <link rel="stylesheet" href="../css/modal.css">
-    <link rel="stylesheet" href="../css/card.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Final Project</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/modal.css">
+  <link rel="stylesheet" href="../css/card.css">
 	<link rel="stylesheet" href="../css/search.css">
+	<link rel="stylesheet" href="../css/schedule.css">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
@@ -17,7 +18,7 @@
         <Nav>
             <ul>
                 <li><a href="index.html">Home</a></li>
-				<li><a href="teste.html">teste</a></li>
+								<li><a href="#schedule-section">Your Schedule</a></li>
             </ul>
         </Nav>
     </header>
@@ -34,9 +35,29 @@
 			  </div>
 		  </div>
 	</div>	
-    <main>
+    <main id="container-movies">
 	</main>
-	<div id="add-form-modal" class="modal" />
+	<section id="schedule-section" class="schedule-section">
+		<div class="schedule-container">
+			<div id="monday" class="frame-card">
+				<header class="frame-header">
+					<h2>Monday</h2>
+				</header>
+				<div class="book">
+					<button class="accept">
+            Change
+        </button>
+					<button>Remove</button>
+					<div class="cover">
+						<img src="https://image.tmdb.org/t/p/original/9cqNxx0GxF0bflZmeSMuL5tnGzr.jpg">		
+					</div>
+				 </div>
+				 <h1>ShawnsShank</h1>
+			</div>
+
+		</div>
+	</section>
+	<div id="add-form-modal" class="modal">
 			<main id="main-content">
 				<div class="poster-preview" style="max-width: 300px;"></div>
 				<form onsubmit="createCard(event)">

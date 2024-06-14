@@ -53,11 +53,11 @@ label {
 .poster-preview {
   width: 100%;
   color: #aa1818;
-  background-size: cover; 
+  background-size: cover;
   background-position: center;
   background-color: #1b1b1b67;
   border-radius: 15px;
-};
+}
 
 .hidden {
   display: none;
@@ -68,7 +68,7 @@ label {
   width: 590px;
 }
 
-.button-modal{
+.button-modal {
   background: #253629;
   color: #ffffff;
   padding: 10px 20px;
