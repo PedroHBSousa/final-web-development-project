@@ -3,13 +3,20 @@
   display: flex;
   background-color: #1d1d1d;
   width: 100%;
-  height: 600px;
-
+  height: 700px;
+  justify-content: flex-start;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
 }
+.schedule-section::-webkit-scrollbar {
+  width: 0;
+}
+
 .schedule-container {
   display: flex;
   width: 100%;
-  justify-content: center;
+  gap: 50px;
+  padding: 20px;
 }
 .frame-card {
   display: block;
@@ -20,8 +27,8 @@
 }
 .card {
   position: relative;
-  width: 300px;
-  height: 400px;
+  width: 350px;
+  height: 525px;
   background-color: #f2f2f2;
   border-radius: 5px;
   display: flex;
@@ -31,16 +38,21 @@
   perspective: 1000px;
   /* box-shadow: 0 0 0 5px #ffffffa2; */
   transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0px 0px 150px -45px rgba(255, 51, 0, 0.5);
+  &:hover {
+    box-shadow: 0px 0px 120px -55px rgba(255, 51, 0, 0.5);
+  }
 }
 
 .card img {
   width: 100%;
+  height: auto;
   fill: #333;
   transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .card:hover {
-  transform: scale(1.05);
+  /* transform: scale(1.05); */
   box-shadow: 0 8px 16px rgba(255, 255, 255, 0.2);
 }
 
@@ -76,6 +88,7 @@
 .card__description {
   margin: 10px 0 0;
   font-size: 14px;
+  font-weight: 400;
   color: #777;
   line-height: 1.4;
   display: -webkit-box;
@@ -83,7 +96,7 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
-.card-button-container{
+.card-button-container {
   display: flex;
   justify-content: space-between;
   margin-top: 30px;
@@ -98,12 +111,12 @@
   border-radius: 34px;
   background-color: transparent;
   font-weight: 600;
-  transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
   overflow: hidden;
 }
 
 .button-watched::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
   margin: auto;
@@ -113,7 +126,7 @@
   scale: 0;
   z-index: -1;
   background-color: rgb(193, 98, 98);
-  transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+  /* transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1); */
 }
 
 .button-watched:hover::before {
@@ -130,7 +143,7 @@
   scale: 1;
 }
 
-.button-change{
+.button-change {
   cursor: pointer;
   position: relative;
   padding: 10px 24px;
@@ -140,12 +153,12 @@
   border-radius: 34px;
   background-color: transparent;
   font-weight: 600;
-  transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
   overflow: hidden;
 }
 
 .button-change::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
   margin: auto;
@@ -155,7 +168,7 @@
   scale: 0;
   z-index: -1;
   background-color: rgb(98, 193, 130);
-  transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+  /* transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1); */
 }
 
 .button-change:hover::before {
@@ -172,38 +185,39 @@
   scale: 1;
 }
 .overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.8);
-    display: none; /* Escondido por padrão */
-    justify-content: center;
-    align-items: center;
-    z-index: 3;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: none; /* Escondido por padrão */
+  justify-content: center;
+  align-items: center;
+  z-index: 3;
 }
 
 .overlay-content {
-    background-color: #272737;
-    padding: 20px;
-    border-radius: 10px;
-    text-align: center;
-    max-width: 500px;
-    width: 80%;
+  background-color: #272737;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  max-width: 500px;
+  width: 80%;
 }
 
 .close-button {
-    position: absolute;
-    top: 10px;
-    right: 20px;
-    font-size: 30px;
-    cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 30px;
+  cursor: pointer;
 }
 .radio-input {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  margin-bottom: 25px;
 }
 
 .radio-input * {
@@ -294,5 +308,31 @@
     box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
   }
 }
+.button-confirm-selection {
+  padding: 17px 40px;
+  border-radius: 50px;
+  cursor: pointer;
+  border: 0;
+  background-color: white;
+  box-shadow: rgb(0 0 0 / 5%) 0 0 8px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  font-size: 15px;
+  transition: all 0.5s ease;
+}
 
+.button-confirm-selection:hover {
+  letter-spacing: 3px;
+  background-color: hsl(261deg 80% 48%);
+  color: hsl(0, 0%, 100%);
+  box-shadow: rgb(93 24 220) 0px 7px 29px 0px;
+}
 
+.button-confirm-selection:active {
+  letter-spacing: 3px;
+  background-color: hsl(261deg 80% 48%);
+  color: hsl(0, 0%, 100%);
+  box-shadow: rgb(93 24 220) 0px 0px 0px 0px;
+  transform: translateY(10px);
+  transition: 100ms;
+}

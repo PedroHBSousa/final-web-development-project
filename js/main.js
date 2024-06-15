@@ -12,31 +12,86 @@ const runTime = document.getElementById("runtime");
 
 const allMovies = [
   {
-    title: "The Shawshank Redemption",
-    genre: "Drama",
-    date: "1994",
+    title: "The Batman",
+    genre: "Crime",
+    date: "2022",
     description:
-      "Imprisoned in the 1940s for the double murder of his wife and her lover, upstanding banker Andy Dufresne begins a new life at the Shawshank prison, where he puts his accounting skills to work for an amoral warden. During his long stretch in prison, Dufresne comes to be admired by the other inmates -- including an older prisoner named Red -- for his integrity and unquenchable sense of hope.d",
-    idMovie: "278",
-    runtime: "2h 22m",
+      "In his second year of fighting crime, Batman uncovers corruption in Gotham City that connects to his own family while facing a serial killer known as the Riddler.",
+    idMovie: "414906",
+    runtime: "2h 57m",
     addressImage:
-      "https://image.tmdb.org/t/p/original/9cqNxx0GxF0bflZmeSMuL5tnGzr.jpg",
+      "https://image.tmdb.org/t/p/original/74xTEgt7R36Fpooo50r9T25onhq.jpg",
   },
   {
-    title: "Forest Gump",
-    genre: "Comedy",
-    date: "1994",
+    title: "Avatar: The Way of Water",
+    genre: "Science Fiction",
+    date: "2022",
     description:
-      "A man with a low IQ has accomplished great things in his life and been present during significant historic events—in each case, far exceeding what anyone imagined he could do. But despite all he has achieved, his one true love eludes him",
-    idMovie: "13",
-    runtime: "2h 22m",
+      "Set more than a decade after the events of the first film, learn the story of the Sully family (Jake, Neytiri, and their kids), the trouble that follows them, the lengths they go to keep each other safe, the battles they fight to stay alive, and the tragedies they endure.",
+    idMovie: "76600",
+    runtime: "3h 12m",
     addressImage:
-      "https://image.tmdb.org/t/p/original/arw2vcBveWOVZr6pxd9XTd1TdQa.jpg",
+      "https://image.tmdb.org/t/p/original/t6HIqrRAclMCA60NsSmeqe9RmNV.jpg",
+  },
+  {
+    title: "1917",
+    genre: "War",
+    date: "2019",
+    description:
+      "At the height of the First World War, two young British soldiers must cross enemy territory and deliver a message that will stop a deadly attack on hundreds of soldiers.",
+    idMovie: "530915",
+    runtime: "1h 59m",
+    addressImage:
+      "https://image.tmdb.org/t/p/original/iZf0KyrE25z1sage4SYFLCCrMi9.jpg",
+  },
+  {
+    title: "Oppenheimer",
+    genre: "Drama",
+    date: "2023",
+    description:
+      "The story of J. Robert Oppenheimer's role in the development of the atomic bomb during World War II.",
+    idMovie: "872585",
+    runtime: "3h 1m",
+    addressImage:
+      "https://image.tmdb.org/t/p/original/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg",
+  },
+  {
+    title: "Pearl",
+    genre: "Horror",
+    date: "2022",
+    description:
+      "Trapped on her family’s isolated farm, Pearl must tend to her ailing father under the bitter and overbearing watch of her devout mother. Lusting for a glamorous life like she’s seen in the movies, Pearl’s ambitions, temptations, and repres...",
+    idMovie: "949423",
+    runtime: "1h 42m",
+    addressImage:
+      "https://image.tmdb.org/t/p/original/ulBLIBqvdnf4H6JBt0OpMCU1ECn.jpg",
+  },
+  {
+    title: "Once Upon a Time... in Hollywood",
+    genre: "Comedy",
+    date: "2019",
+    description:
+      "Los Angeles, 1969. TV star Rick Dalton, a struggling actor specializing in westerns, and stuntman Cliff Booth, his best friend, try to survive in a constantly changing movie industry. Dalton is the neighbor of the young and promising actress and model Sharon Tate, who has just married the prestigious Polish director Roman Polanski…",
+    idMovie: "466272",
+    runtime: "2h 42m",
+    addressImage:
+      "https://image.tmdb.org/t/p/original/8j58iEBw9pOXFD2L0nt0ZXeHviB.jpg",
+  },
+  {
+    title: "Furiosa: A Mad Max Saga",
+    genre: "Action",
+    date: "2024",
+    description:
+      "As the world fell, young Furiosa is snatched from the Green Place of Many Mothers and falls into the hands of a great Biker Horde led by the Warlord Dementus. Sweeping through the Wasteland they come across the Citadel presided over by The Immortan Joe. While the two Tyrants war for dominance, Furiosa must survive many trials as she puts together the means to find her way home.",
+    idMovie: "786892",
+    runtime: "2h 29m",
+    addressImage:
+      "https://image.tmdb.org/t/p/original/iADOJ8Zymht2JPMoy3R7xceZprc.jpg",
   },
 ];
 
 function convertToBrazilianDate(date) {
-  const [year, month, day] = date.split("-");
+  const [year] = date.split("-");
   return `${year}`;
 }
 
@@ -88,10 +143,19 @@ searchButton.addEventListener("click", async (event) => {
       description.value = detailsMovie.overview;
       poster.style.backgroundImage = `url(https://image.tmdb.org/t/p/original${detailsMovie.poster_path})`;
       runTime.value = converterMinutosParaHoras(detailsMovie.runtime);
-
       addressImage.value =
         "https://image.tmdb.org/t/p/original" + detailsMovie.poster_path;
       console.log(detailsMovie);
+      const newMovie = {
+        title: detailsMovie.title,
+        genre: detailsMovie.genres[0].name,
+        date: convertToBrazilianDate(detailsMovie.release_date),
+        description: detailsMovie.overview,
+        idMovie: detailsMovie.id,
+        runtime: converterMinutosParaHoras(detailsMovie.runtime),
+        addressImage: `https://image.tmdb.org/t/p/original${detailsMovie.poster_path}`,
+      };
+      allMovies.push(newMovie);
     } else {
       alert(
         "Erro: O filme digitado não foi encontrado. Por favor, tente novamente ou digite outro filme."
@@ -99,7 +163,6 @@ searchButton.addEventListener("click", async (event) => {
     }
   } catch (error) {
     console.log(error);
-
     alert("Problema Interno");
   } finally {
     main.classList.remove("hidden");
@@ -150,37 +213,55 @@ function addCard({
   });
 }
 
-function openEditSchedule (day) {
-  document.getElementById('overlay').style.display = 'flex';
-  document.getElementById('day-title').innerText = day.charAt(0).toUpperCase() + day.slice(1);
+function openEditSchedule(day) {
+  document.getElementById("overlay").style.display = "flex";
+  document.getElementById("day-title").innerText =
+    day.charAt(0).toUpperCase() + day.slice(1);
   currentDay = day;
 
-  const radioInputDiv = document.getElementById('radio-input');
-  radioInputDiv.innerHTML = ''; // Limpa as opções anteriores
+  const radioInputDiv = document.getElementById("radio-input");
+  radioInputDiv.innerHTML = ""; // Limpa as opções anteriores
 
   allMovies.forEach((movie, index) => {
-      const label = document.createElement('label');
-      label.classList.add('label');
+    const label = document.createElement("label");
+    label.classList.add("label");
 
-      const input = document.createElement('input');
-      input.type = 'radio';
-      input.name = 'movie-radio';
-      input.value = index;
-      input.id = `movie-${index}`;
-      input.onclick = () => selectedMovie = movie;
+    const input = document.createElement("input");
+    input.type = "radio";
+    input.name = "movie-radio";
+    input.value = index;
+    input.id = `movie-${index}`;
+    input.onclick = () => (selectedMovie = movie);
 
-      const text = document.createElement('p');
-      text.classList.add('text');
-      text.innerText = movie.title;
+    const text = document.createElement("p");
+    text.classList.add("text");
+    text.innerText = movie.title;
 
-      label.appendChild(input);
-      label.appendChild(text);
-      radioInputDiv.appendChild(label);
+    label.appendChild(input);
+    label.appendChild(text);
+    radioInputDiv.appendChild(label);
   });
 }
 function closeEditSchedule() {
-
-  document.getElementById('overlay').style.display = 'none';
+  document.getElementById("overlay").style.display = "none";
+}
+function confirmSelection() {
+  if (selectedMovie) {
+    const card = document.getElementById(currentDay).querySelector(".card");
+    card.querySelector("img").src = selectedMovie.addressImage;
+    card.querySelector(".card__title").innerText = selectedMovie.title;
+    card.querySelector(".card__description").innerText =
+      selectedMovie.description;
+    closeEditSchedule();
+  }
+}
+function markAsWatched(day) {
+  const card = document.getElementById(day).querySelector(".card");
+  card.querySelector("img").src = "../img/popcorn.png";
+  card.querySelector(".card__title").innerText = "No movie for today";
+  card.querySelector(
+    ".card__description"
+  ).innerText = `Looks like you've already seen ${day} movie. Select the change option to add a movie.`;
 }
 
 function loadCards() {
@@ -294,6 +375,31 @@ const editCard = (event) => {
 };
 document.addEventListener("DOMContentLoaded", () => {
   const container = document.getElementById("container-movies");
+  let scrollInterval;
+
+  container.addEventListener("mousemove", (event) => {
+    const containerRect = container.getBoundingClientRect();
+    const mouseX = event.clientX - containerRect.left;
+
+    clearInterval(scrollInterval);
+
+    if (mouseX < 300) {
+      scrollInterval = setInterval(() => {
+        container.scrollLeft -= 10;
+      }, 10); // Aproximadamente 60fps
+    } else if (mouseX > containerRect.width - 300) {
+      scrollInterval = setInterval(() => {
+        container.scrollLeft += 10;
+      }, 10); // Aproximadamente 60fps
+    }
+  });
+
+  container.addEventListener("mouseleave", () => {
+    clearInterval(scrollInterval);
+  });
+});
+document.addEventListener("DOMContentLoaded", () => {
+  const container = document.getElementById("schedule-section");
   let scrollInterval;
 
   container.addEventListener("mousemove", (event) => {

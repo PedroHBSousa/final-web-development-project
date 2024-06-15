@@ -50,7 +50,103 @@
 					  <p class="card__description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
 					  <div class="card-button-container">
 						<button class="button-change" onclick="openEditSchedule('monday')">Change</button> 
-					  	<button class="button-watched">Watched</button>
+					  <button class="button-watched" onclick="markAsWatched('monday')">Watched</button>
+					  </div>
+					</div>
+				  </div>
+			</div>
+			<div id="tuesday" class="frame-card">
+				<header class="frame-header">
+					<h2>Tuesday</h2>
+				</header>
+				<div class="card">
+					<img src="https://image.tmdb.org/t/p/original/9cqNxx0GxF0bflZmeSMuL5tnGzr.jpg">
+					<div class="card__content">
+					  <p class="card__title">Card Title</p>
+					  <p class="card__description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+					  <div class="card-button-container">
+						<button class="button-change" onclick="openEditSchedule('tuesday')">Change</button> 
+					  <button class="button-watched" onclick="markAsWatched('tuesday')">Watched</button>
+					  </div>
+					</div>
+				  </div>
+			</div>
+			<div id="wednesday" class="frame-card">
+				<header class="frame-header">
+					<h2>Wednesday</h2>
+				</header>
+				<div class="card">
+					<img src="https://image.tmdb.org/t/p/original/9cqNxx0GxF0bflZmeSMuL5tnGzr.jpg">
+					<div class="card__content">
+					  <p class="card__title">Card Title</p>
+					  <p class="card__description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+					  <div class="card-button-container">
+						<button class="button-change" onclick="openEditSchedule('wednesday')">Change</button> 
+					  <button class="button-watched" onclick="markAsWatched('wednesday')">Watched</button>
+					  </div>
+					</div>
+				  </div>
+			</div>
+			<div id="thursday" class="frame-card">
+				<header class="frame-header">
+					<h2>Thursday</h2>
+				</header>
+				<div class="card">
+					<img src="https://image.tmdb.org/t/p/original/9cqNxx0GxF0bflZmeSMuL5tnGzr.jpg">
+					<div class="card__content">
+					  <p class="card__title">Card Title</p>
+					  <p class="card__description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+					  <div class="card-button-container">
+						<button class="button-change" onclick="openEditSchedule('thursday')">Change</button> 
+					  <button class="button-watched" onclick="markAsWatched('thursday')">Watched</button>
+					  </div>
+					</div>
+				  </div>
+			</div>
+			<div id="friday" class="frame-card">
+				<header class="frame-header">
+					<h2>Friday</h2>
+				</header>
+				<div class="card">
+					<img src="https://image.tmdb.org/t/p/original/9cqNxx0GxF0bflZmeSMuL5tnGzr.jpg">
+					<div class="card__content">
+					  <p class="card__title">Card Title</p>
+					  <p class="card__description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+					  <div class="card-button-container">
+						<button class="button-change" onclick="openEditSchedule('friday')">Change</button> 
+					  <button class="button-watched" onclick="markAsWatched('friday')">Watched</button>
+					  </div>
+					</div>
+				  </div>
+			</div>
+			<div id="saturday" class="frame-card">
+				<header class="frame-header">
+					<h2>Saturday</h2>
+				</header>
+				<div class="card">
+					<img src="https://image.tmdb.org/t/p/original/9cqNxx0GxF0bflZmeSMuL5tnGzr.jpg">
+					<div class="card__content">
+					  <p class="card__title">Card Title</p>
+					  <p class="card__description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+					  <div class="card-button-container">
+						<button class="button-change" onclick="openEditSchedule('saturday')">Change</button> 
+					  <button class="button-watched" onclick="markAsWatched('saturday')">Watched</button>
+					  </div>
+					</div>
+				  </div>
+			</div>
+			<div id="sunday" class="frame-card">
+				<header class="frame-header">
+					<h2>Sunday</h2>
+				</header>
+				<div class="card">
+					<img src="https://image.tmdb.org/t/p/original/9cqNxx0GxF0bflZmeSMuL5tnGzr.jpg">
+					<div class="card__content">
+					  <p class="card__title">Card Title</p>
+					  <p class="card__description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+					  <div class="card-button-container">
+						<button class="button-change" onclick="openEditSchedule('sunday')">Change</button> 
+					  <button class="button-watched" onclick="markAsWatched('sunday')">Watched</button>
 					  </div>
 					</div>
 				  </div>
@@ -104,8 +200,8 @@
 				  <input value="value-1" name="value-radio" checked="" id="value-1" type="radio"/>
 				  <p class="text">Designer</p>
 				</label> -->
-			<button onclick="confirmSelection()">Confirm</button>
 			</div>
+			<button class="button-confirm-selection" onclick="confirmSelection()">Confirm</button>
 		</div>
 	</div>
     <script src="./js/main.js"></script>
