@@ -3,22 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Final Project</title>
+  <title>IFMovie</title>
+	<link rel="icon" href="./img/icon2.svg" type="image/x-icon">
   <link rel="stylesheet" href="../css/styles.css">
   <link rel="stylesheet" href="../css/modal.css">
   <link rel="stylesheet" href="../css/card.css">
 	<link rel="stylesheet" href="../css/search.css">
 	<link rel="stylesheet" href="../css/schedule.css">
+	<link rel="stylesheet" href="../css/alert.css">
+	<link rel="stylesheet" href="../css/loader.css">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
 <body onload="loadCards()">
     <header>
+			<div class="logotipo">
+				<img src="./img/icon2.svg" alt="Logo IFMovie">
+				<h1><span>IF</span>Movie</h1>
+			</div>
         <Nav>
             <ul>
-                <li><a href="index.html">Home</a></li>
-								<li><a href="#schedule-section">Your Schedule</a></li>
+                <li><a href="index.html" class="active">Home</a></li>
+								<li><a href="#schedule-section">Movie Schedule</a></li>
             </ul>
         </Nav>
     </header>
@@ -33,7 +40,8 @@
 				  </button>
 				</div>
 			  </div>
-		  </div>
+		  </div>	
+			<div class="loader" id="loader"></div>
 	</div>	
     <main id="container-movies">
 	</main>
@@ -153,6 +161,9 @@
 			</div>
 		</div>
 	</section>
+	<footer>
+		<p>Copyright 2024 © Pedro Barbosa</p>
+	</footer>
 	<div id="add-form-modal" class="modal">
 			<main id="main-content">
 				<div class="poster-preview" style="max-width: 300px;"></div>
@@ -204,6 +215,7 @@
 			<button class="button-confirm-selection" onclick="confirmSelection()">Confirm</button>
 		</div>
 	</div>
+	<div id="custom-alert" class="custom-alert"></div>
     <script src="./js/main.js"></script>
 </body>
 </html>

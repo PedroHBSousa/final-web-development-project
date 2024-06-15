@@ -9,6 +9,7 @@ const main = document.querySelector("#main-content");
 const addressImage = document.getElementById("addressImage");
 const idMovie = document.getElementById("idMovie");
 const runTime = document.getElementById("runtime");
+const loader = document.getElementById("loader");
 
 const allMovies = [
   {
@@ -110,8 +111,18 @@ const openModal = (idModal) => {
   modal.style.display = "flex";
 };
 
+function showAlert(message) {
+  const alertBox = document.getElementById("custom-alert");
+  alertBox.textContent = message;
+  alertBox.classList.add("show");
+  setTimeout(() => {
+    alertBox.classList.remove("show");
+  }, 3000);
+}
+
 searchButton.addEventListener("click", async (event) => {
   main.classList.add("hidden");
+  loader.style.display = "block";
   try {
     const options = {
       method: "GET",
@@ -145,7 +156,7 @@ searchButton.addEventListener("click", async (event) => {
       runTime.value = converterMinutosParaHoras(detailsMovie.runtime);
       addressImage.value =
         "https://image.tmdb.org/t/p/original" + detailsMovie.poster_path;
-      console.log(detailsMovie);
+
       const newMovie = {
         title: detailsMovie.title,
         genre: detailsMovie.genres[0].name,
@@ -156,17 +167,16 @@ searchButton.addEventListener("click", async (event) => {
         addressImage: `https://image.tmdb.org/t/p/original${detailsMovie.poster_path}`,
       };
       allMovies.push(newMovie);
+      openModal("add-form-modal");
     } else {
-      alert(
-        "Erro: O filme digitado não foi encontrado. Por favor, tente novamente ou digite outro filme."
-      );
+      showAlert("The inserted movie was not found");
     }
   } catch (error) {
     console.log(error);
-    alert("Problema Interno");
+    alert("A problem occurred on the server");
   } finally {
+    loader.style.display = "none";
     main.classList.remove("hidden");
-    openModal("add-form-modal");
   }
 });
 
@@ -181,29 +191,32 @@ function addCard({
 }) {
   const main = document.querySelector("body > main");
 
-  main.innerHTML += `
-  <div class="movie_card" id="${idMovie}" onmouseenter="cardEnter(event)" onmouseleave="cardLeave(event)">
-    <div class="info_section">
-      <div class="movie_header">
-        <img class="locandina" src="${addressImage}"/>
-        <h1>${title}</h1>
-        <h4>${date}</h4>
-        <span class="minutes">${runtime}</span>
-        <p class="type">${genre}</p>
+  main.insertAdjacentHTML(
+    "afterbegin",
+    `
+    <div class="movie_card" id="${idMovie}" onmouseenter="cardEnter(event)" onmouseleave="cardLeave(event)">
+      <div class="info_section">
+        <div class="movie_header">
+          <img class="locandina" src="${addressImage}"/>
+          <h1>${title}</h1>
+          <h4>${date}</h4>
+          <span class="minutes">${runtime}</span>
+          <p class="type">${genre}</p>
+      </div>
+      <div class="movie_desc">
+        <p class="text">
+          ${description}
+        </p>
+      </div>
     </div>
-    <div class="movie_desc">
-      <p class="text">
-        ${description}
-      </p>
+    <div class="blur_back" style="background-image: url('${addressImage}')"></div>
+    <div class="card-menu">
+      <span class="card-menu-button-edit">Edit</span>
+      <span class="card-menu-button-remove" onclick="removeCard(event)">Remove</span>
     </div>
   </div>
-  <div class="blur_back" style="background-image: url('${addressImage}')"></div>
-  <div class="card-menu">
-    <span class="card-menu-button-edit">Edit</span>
-    <span class="card-menu-button-remove" onclick="removeCard(event)">Remove</span>
-  </div>
-</div>
-  `;
+  `
+  );
 
   const allEdit = main.querySelectorAll(
     ".movie_card .card-menu span:first-child"
@@ -383,14 +396,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     clearInterval(scrollInterval);
 
-    if (mouseX < 300) {
+    if (mouseX < 500) {
       scrollInterval = setInterval(() => {
         container.scrollLeft -= 10;
-      }, 10); // Aproximadamente 60fps
-    } else if (mouseX > containerRect.width - 300) {
+      }, 8); // Aproximadamente 60fps
+    } else if (mouseX > containerRect.width - 500) {
       scrollInterval = setInterval(() => {
         container.scrollLeft += 10;
-      }, 10); // Aproximadamente 60fps
+      }, 8); // Aproximadamente 60fps
     }
   });
 

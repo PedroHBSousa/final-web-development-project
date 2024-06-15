@@ -2,7 +2,7 @@ html,
 body {
   margin: 0;
   padding: 0;
-  background: #ffffff;
+  background: #1d1d1d;
   color: #fff;
   font-family: "Noto Sans", sans-serif;
   font-weight: 200;
@@ -16,6 +16,7 @@ body > header {
   align-items: center;
   justify-content: space-between;
   font-weight: 400;
+  font-size: 1.1rem;
 }
 nav ul {
   display: flex;
@@ -30,6 +31,15 @@ body > header nav a {
   text-decoration: none;
   padding: 0 0 21px 0;
 }
+body > header nav a:hover {
+  color: #ff6f59;
+  border-bottom: 3px solid #ff6f59;
+}
+
+body > header nav a.active {
+  color: #ff6f59;
+  border-bottom: 3px solid #ff6f59;
+}
 /* button {
   background: #253629;
   color: #ffffff;
@@ -40,11 +50,13 @@ body > header nav a {
   font-size: 1.1rem;
 } */
 body > footer {
-  background: #000;
+  background: #1d1d1d;
   height: 200px;
   display: flex;
   justify-content: center;
   align-items: center;
+  color: #ff6f59;
+  font-weight: 400;
 }
 body > main {
   margin: 0;
@@ -55,8 +67,20 @@ body > main {
   justify-content: flex-start;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
-
 }
 body > main::-webkit-scrollbar {
   width: 0;
+}
+.logotipo {
+  display: flex;
+  align-items: center;
+}
+
+.logotipo img {
+  width: 60px;
+  height: 60px;
+}
+
+.logotipo h1 span {
+  color: #ff6f59;
 }
