@@ -98,10 +98,8 @@ function convertToBrazilianDate(date) {
 
 function converterMinutosParaHoras(minutes) {
   var minutos = parseInt(minutes);
-
   var horas = Math.floor(minutos / 60);
   var minutosRestantes = minutos % 60;
-
   var resultado = horas + "h " + minutosRestantes + "m";
   return resultado;
 }
@@ -111,9 +109,10 @@ const openModal = (idModal) => {
   modal.style.display = "flex";
 };
 
-function showAlert(message) {
+function showAlert(message, backgroundColor) {
   const alertBox = document.getElementById("custom-alert");
   alertBox.textContent = message;
+  alertBox.style.backgroundColor = backgroundColor;
   alertBox.classList.add("show");
   setTimeout(() => {
     alertBox.classList.remove("show");
@@ -169,11 +168,11 @@ searchButton.addEventListener("click", async (event) => {
       allMovies.push(newMovie);
       openModal("add-form-modal");
     } else {
-      showAlert("The inserted movie was not found");
+      showAlert("The inserted movie was not found", "red");
     }
   } catch (error) {
     console.log(error);
-    alert("A problem occurred on the server");
+    showAlert("A problem occurred on the server", "red");
   } finally {
     loader.style.display = "none";
     main.classList.remove("hidden");
@@ -291,25 +290,29 @@ const cardLeave = (event) => {
 };
 
 const removeCard = (event) => {
-  event.target.closest(".movie_card").remove();
+  const card = event.target.closest(".movie_card");
+  const cardId = card.id;
+  const movieIndex = allMovies.findIndex((movie) => movie.idMovie === cardId);
+  if (movieIndex !== -1) {
+    allMovies.splice(movieIndex, 1);
+  }
+  card.remove();
 };
 
 const createCard = (event) => {
   event.preventDefault();
-
   const formData = new FormData(event.target);
   const movie = Object.fromEntries(formData);
-
   addCard(movie);
   event.target.reset();
   closeModal(null, "add-form-modal");
+  searchInput.value = "";
+  showAlert("Movie added successfully", "green");
 };
 
-document
-  .getElementById("return-button")
-  .addEventListener("click", function (event) {
-    closeModal(event, "add-form-modal");
-  });
+document.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("add-movie-form");
+});
 
 const closeModal = (event, id) => {
   if (id) {
@@ -326,24 +329,20 @@ const closeModal = (event, id) => {
 };
 const openEditModal = (event) => {
   const card = event.target.closest(".movie_card");
-
   const title = document.getElementById("edit-title");
   title.value = card.querySelector(".movie_header h1").innerText;
-
   const genre = document.getElementById("edit-genre");
   genre.value = card.querySelector(".movie_header .type").innerText;
-
   const date = document.getElementById("edit-date");
   date.value = card.querySelector(".movie_header h4").innerText;
-
   const description = document.getElementById("edit-description");
   description.value = card.querySelector(".movie_desc .text").innerText;
-
   const idMovie = document.getElementById("edit-idMovie");
   idMovie.value = card.id;
-
   const addressImage = document.getElementById("edit-addressImage");
   addressImage.value = card.querySelector(".locandina").getAttribute("src");
+  const runtime = document.getElementById("edit-runtime");
+  runtime.value = card.querySelector(".movie_header .minutes").innerText;
 
   openModal("edit-form-modal");
 };
@@ -354,48 +353,36 @@ function updateCard({
   description,
   idMovie,
   addressImage,
+  runtime,
 }) {
   const card = document.getElementById(idMovie);
-
-  card.innerHTML = `
-      <div>
-        <img src="${addressImage}" id="poster-preview-${idMovie}" class="poster-preview">
-        <header>${title}</header>
-        <p>${genre}</p>
-        <p>${date}</p> 
-        <p class="truncate-3">${description}</p>
-	    </div>
-      <div class="card-menu">
-				<span>Editar</span>
-				<span onclick="removeCard(event)">Excluir</span>
-			</div>
-    `;
-
-  const edit = card.querySelector(".card-ticker .card-menu span:first-child");
-  edit.addEventListener("click", openEditModal);
+  card.querySelector(".movie_header h1").innerText = title;
+  card.querySelector(".movie_header h4").innerText = date;
+  card.querySelector(".movie_header .minutes").innerText = runtime;
+  card.querySelector(".movie_header .type").innerText = genre;
+  card.querySelector(".movie_desc .text").innerText = description;
+  card.querySelector(".locandina").setAttribute("src", addressImage);
+  card.querySelector(
+    ".blur_back"
+  ).style.backgroundImage = `url('${addressImage}')`;
 }
 
 const editCard = (event) => {
   event.preventDefault();
   const formData = new FormData(event.target);
   const movie = Object.fromEntries(formData);
-  const card = document.getElementById(movie.idMovie); //erro pode estar aqui
-  console.log(card, movie);
-
   updateCard(movie);
-
   closeModal(null, "edit-form-modal");
+  showAlert("Movie edited successfully", "green");
 };
+
 document.addEventListener("DOMContentLoaded", () => {
   const container = document.getElementById("container-movies");
   let scrollInterval;
-
   container.addEventListener("mousemove", (event) => {
     const containerRect = container.getBoundingClientRect();
     const mouseX = event.clientX - containerRect.left;
-
     clearInterval(scrollInterval);
-
     if (mouseX < 500) {
       scrollInterval = setInterval(() => {
         container.scrollLeft -= 10;
@@ -418,9 +405,7 @@ document.addEventListener("DOMContentLoaded", () => {
   container.addEventListener("mousemove", (event) => {
     const containerRect = container.getBoundingClientRect();
     const mouseX = event.clientX - containerRect.left;
-
     clearInterval(scrollInterval);
-
     if (mouseX < 300) {
       scrollInterval = setInterval(() => {
         container.scrollLeft -= 10;
